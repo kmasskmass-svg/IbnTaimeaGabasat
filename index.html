@@ -67,6 +67,7 @@
     color:var(--gold); background:var(--parchment-2); border:1px solid var(--line);
     border-radius:999px; padding:4px 16px; margin:6px 0 8px; letter-spacing:.02em;
   }
+  .progressive-note{color:var(--ink-soft); font-size:11.5px; opacity:.8; margin:0 0 10px;}
   .notice{max-width:680px; margin:10px auto 0; font-size:12.5px; color:var(--accent-dark); background:rgba(15,92,83,.08); border:1px solid var(--line); border-radius:10px; padding:10px 16px; line-height:1.9;}
 
   .toolbar{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; margin:22px 0 8px;}
@@ -137,6 +138,38 @@
   .bubble.bubble-pdf .b-label, .bubble.bubble-pdf .b-count{color:#f5e6d3;}
   .bubble.bubble-preface{background:radial-gradient(circle at 32% 26%, #2f4a44, #16302a 85%); border-color:#a9d4c5;}
   .bubble.bubble-preface .b-label, .bubble.bubble-preface .b-count{color:#e6f2ec;}
+  .bubble.bubble-fruits{background:radial-gradient(circle at 32% 26%, #4a3a6b, #241a3d 85%); border-color:#d9c7f0;}
+  .bubble.bubble-fruits .b-label, .bubble.bubble-fruits .b-count{color:#efe8fb;}
+
+  /* ---------- لوحة ثمرات (تطبيقات الجامع) ---------- */
+  .works-intro{
+    text-align:center; font-size:13.5px; line-height:2; color:#e2d7bd;
+    background:rgba(0,0,0,.18); border:1px solid rgba(255,255,255,.14);
+    border-radius:14px; padding:14px 16px; margin-bottom:20px;
+  }
+  .works-intro strong{color:var(--gold-light);}
+  .works-grid{display:flex; flex-direction:column; gap:12px;}
+  .work-card{
+    display:flex; align-items:center; gap:12px; text-decoration:none;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18);
+    border-radius:14px; padding:13px 15px; color:#f5ecd8;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .work-card:hover{transform:translateY(-2px); background:rgba(255,255,255,.13); border-color:var(--gold-light);}
+  .work-icon{
+    flex:0 0 auto; width:44px; height:44px; border-radius:12px; font-size:21px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--gold-light), var(--gold)); color:#3a2c10;
+    box-shadow:0 6px 14px rgba(0,0,0,.28);
+  }
+  .work-body{flex:1; min-width:0;}
+  .work-name{font-size:14.5px; font-weight:700; color:#f9f1de; line-height:1.5;}
+  .work-desc{font-size:11.5px; color:#cbbfa0; margin-top:3px; line-height:1.6;}
+  .work-go{flex:0 0 auto; font-size:17px; color:var(--gold-light); opacity:.8;}
+  .works-note{
+    text-align:center; font-size:12px; color:#c9bd9e; margin-top:22px;
+    border-top:1px solid rgba(255,255,255,.15); padding-top:14px; line-height:1.9;
+  }
 
   .pdf-panel{max-width:520px; margin:0 auto; padding:0 22px 40px; color:#f5ecd8;}
   .pdf-quick-btn{
@@ -413,6 +446,7 @@
     <div class="kicker">شيخ الإسلام تقي الدين</div>
     <h1>قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ</h1>
     <div class="quote-counter" id="quoteCounter"></div>
+    <div class="progressive-note">سيتم إدراج فوائد بقية أجزاء "مجموع الفتاوى" تدريجيًا بإذن الله</div>
     <p class="compiler-line">جمع كليب بن أحمد بن ضيف الله الزهراني</p>
     <p class="dua-line">غفر الله له ولوالديه ولزوجه وأصلح له في ذريته...</p>
     <p class="subtitle">مجموعة أقوال وفتاوى شيخ الإسلام أحمد بن تيمية الحرّاني (٦٦١ – ٧٢٨ هـ)، قابلة للتصدير كبطاقة صورة ومشاركتها، ومبوّبة في أبواب العلم المختلفة</p>
@@ -545,6 +579,143 @@
     </div>
   </div>
 
+  <div class="bubble-overlay" id="guideOverlay">
+    <div class="bubble-overlay-head">
+      <div>
+        <div class="bubble-title">❓ دليل الاستخدام</div>
+        <div class="bubble-sub">كل ما تحتاج معرفته للاستفادة من التطبيق</div>
+      </div>
+      <div class="bubble-close" id="guideClose">✕</div>
+    </div>
+    <div class="preface-panel">
+      <p class="preface-bism" style="font-size:16px;">📖 التصفّح بين الفوائد</p>
+      <ul class="preface-list">
+        <li><strong>على الجوال:</strong> مرّر بإصبعك يمينًا أو شمالًا على البطاقة للانتقال بين الفوائد، أو استخدم سهمي التنقل على جانبي الشاشة.</li>
+        <li><strong>على الحاسوب:</strong> اضغط مع السحب بالفأرة، أو استخدم سهمي التنقل، أو اكتب رقم صفحة في خانة "اذهب إلى" أسفل الشاشة والقفز إليها مباشرة.</li>
+        <li><strong>الفقاعات العائمة (☰):</strong> افتحها للتنقل السريع بين الأبواب، المفضلة، الفهرس الموضوعي، فائدة اليوم، ومقدمة التطبيق.</li>
+      </ul>
+      <p class="preface-bism" style="font-size:16px; margin-top:20px;">🔍 البحث والتصفح الذكي</p>
+      <ul class="preface-list">
+        <li><strong>البحث:</strong> اكتب أي كلمة في مربع البحث أعلى الصفحة؛ سيتوسّع البحث تلقائيًا ليشمل ألفاظًا ذات صلة بالموضوع نفسه.</li>
+        <li><strong>الفهرس الموضوعي (📚):</strong> تصفّح الفوائد مجمّعة حسب موضوعها (كالصبر، التوحيد، العلم...) بدل ترتيب الأجزاء فقط.</li>
+        <li><strong>فائدة اليوم (🌅):</strong> فائدة جديدة تظهر تلقائيًا كل يوم، ويمكنك تفعيل تنبيه لها من داخل نافذتها.</li>
+        <li><strong>🎲 فائدة عشوائية:</strong> زر سريع في الأعلى لتصفح عفوي غير مقصود.</li>
+      </ul>
+      <p class="preface-bism" style="font-size:16px; margin-top:20px;">⭐ الحفظ والتخصيص</p>
+      <ul class="preface-list">
+        <li><strong>⭐ / ☆ المفضلة:</strong> اضغط لحفظ الفائدة في قسم "المفضلة" الخاص بك على هذا الجهاز.</li>
+        <li><strong>📝 الملاحظات الشخصية:</strong> اكتب ملاحظة خاصة بك على أي فائدة، تُحفظ على جهازك فقط وتظهر معاينتها أسفل البطاقة.</li>
+        <li><strong>🎨 المظهر:</strong> من قائمة التخصيص غيّر ألوان السمة، حجم الخط، ونوع الخط العربي.</li>
+      </ul>
+      <p class="preface-bism" style="font-size:16px; margin-top:20px;">📤 مشاركة فائدة</p>
+      <ul class="preface-list">
+        <li><strong>⭳ تحميل كصورة:</strong> يحوّل البطاقة الحالية إلى صورة أنيقة تُحفظ على جهازك.</li>
+        <li><strong>✆ واتساب:</strong> يفتح مشاركة مباشرة للبطاقة كصورة عبر واتساب (أو تطبيق المشاركة في جهازك).</li>
+        <li><strong>✈ تيليجرام و 𝕏 (تويتر):</strong> يفتحان نافذة مشاركة جاهزة بنص الفائدة ورابطها في تلك المنصة مباشرة.</li>
+        <li><strong>🔗 نسخ الرابط:</strong> ينسخ رابطًا خاصًا بهذه الفائدة تحديدًا، يفتح عند زيارته نفس الفائدة مباشرة لمن أرسلته له.</li>
+        <li><strong>🖨 طباعة:</strong> يفتح تصميم طباعة نظيف لهذه الفائدة لطباعتها ورقيًا.</li>
+      </ul>
+      <p class="preface-bism" style="font-size:16px; margin-top:20px;">📄 تنزيل الكتاب كاملًا</p>
+      <ul class="preface-list">
+        <li>من فقاعة "تنزيل PDF"، يمكنك اختيار أبواب معينة أو الكتاب كاملًا، وتنزيله كملف PDF منسّق بغلاف ومقدمة وترقيم صفحات.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bubble-overlay" id="fruitsOverlay">
+    <div class="bubble-overlay-head">
+      <div>
+        <div class="bubble-title">🌿 ثمرات</div>
+        <div class="bubble-sub">أعمالٌ أخرى من إنتاج جامع هذا التطبيق</div>
+      </div>
+      <div class="bubble-close" id="fruitsClose">✕</div>
+    </div>
+    <div class="preface-panel">
+      <div class="works-intro">
+        هذه ثمراتٌ أخرى من <strong>إنتاج جامع هذا التطبيق</strong>: كليب بن أحمد بن ضيف الله الزهراني،
+        بين تطبيقاتٍ علميّةٍ وأخرى نافعةٍ في شؤون الحياة. اضغط على أيٍّ منها لفتحه في صفحةٍ جديدة.
+      </div>
+      <div class="works-grid">
+        <a class="work-card" href="https://kmasskmass-svg.github.io/ALMATNALMODAHAB/" target="_blank" rel="noopener">
+          <div class="work-icon">📗</div>
+          <div class="work-body">
+            <div class="work-name">المتن المذهب</div>
+            <div class="work-desc">بأدلة مسائل مختصرات الفقه الحنبلي</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/Etmam-MatnMukhalafat/" target="_blank" rel="noopener">
+          <div class="work-icon">📘</div>
+          <div class="work-body">
+            <div class="work-name">متن إتمام المطالب</div>
+            <div class="work-desc">مخالفات المتون الستة</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/EkhtesarTafseer/" target="_blank" rel="noopener">
+          <div class="work-icon">📖</div>
+          <div class="work-body">
+            <div class="work-name">الاختصار والجمع والتكميل</div>
+            <div class="work-desc">في التفسير</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/AlsalahMokaranah/" target="_blank" rel="noopener">
+          <div class="work-icon">🕌</div>
+          <div class="work-body">
+            <div class="work-name">الصلاة على المذاهب الأربعة</div>
+            <div class="work-desc">دراسة فقهية مقارنة</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/kashafnew/" target="_blank" rel="noopener">
+          <div class="work-icon">🔦</div>
+          <div class="work-body">
+            <div class="work-name">كشاف القناع الصغير</div>
+            <div class="work-desc">كشافٌ ميسَّرٌ للبحث والتصفّح</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/home-budget/" target="_blank" rel="noopener">
+          <div class="work-icon">💰</div>
+          <div class="work-body">
+            <div class="work-name">نظام الميزانية الذكي</div>
+            <div class="work-desc">لتنظيم مصروفات البيت وضبط المدخرات</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/Takaleef-Arbah/" target="_blank" rel="noopener">
+          <div class="work-icon">🧺</div>
+          <div class="work-body">
+            <div class="work-name">ترف</div>
+            <div class="work-desc">تطبيقٌ للأسر المنتجة لحساب التكاليف والأرباح</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/Botaka-Design/" target="_blank" rel="noopener">
+          <div class="work-icon">🎨</div>
+          <div class="work-body">
+            <div class="work-name">زخرفة</div>
+            <div class="work-desc">تصميم البطاقات والزخارف</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/Play/" target="_blank" rel="noopener">
+          <div class="work-icon">💎</div>
+          <div class="work-body">
+            <div class="work-name">جُمان</div>
+            <div class="work-desc">مسابقةٌ ثقافيةٌ تفاعليّة</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+      </div>
+      <div class="works-note">
+        جميعُ هذه الأعمالِ من إنتاج جامعِ هذا التطبيق، أُخرجت ابتغاءَ وجهِ الله ونفعِ المسلمين،
+        فلا تنسَ الجامعَ ووالديه من دعوةٍ صالحةٍ بظهر الغيب.
+      </div>
+    </div>
+  </div>
+
   <div class="bubble-overlay" id="dailyOverlay">
     <div class="bubble-overlay-head">
       <div>
@@ -579,6 +750,9 @@
       </ul>
       <p>وإني لأرجو أنْ يكونَ هذا العَمَلُ المَبْرُورُ رَوْضَةً لِلبَصَائِرِ، ومِفْتَاحاً لِطُلَّابِ الحَقِّ، سائلاً المَوْلَى جَلَّ في عُلاهُ أنْ يَجْعَلَهُ خَالِصاً لِوَجْهِهِ الكَرِيم، وأنْ يَنْفَعَ بهِ كُلَّ مَنْ قَرَأَهُ أو نَشَرَه، إنَّهُ سَمِيعٌ مُجِيب.</p>
       <p class="preface-sign">— كليب بن أحمد بن ضيف الله الزهراني</p>
+      <p style="font-size:12.5px; color:var(--ink-soft); opacity:.85; text-align:center; margin-top:14px; border-top:1px solid var(--line); padding-top:12px;">
+        ⏳ ملحوظة: يضمّ هذا الإصدار حاليًا فوائدَ الأجزاء العشرة الأولى من "مجموع الفتاوى"، وسيتم -بإذن الله- إدراجُ فوائد بقيّة الأجزاء تدريجيًا في الإصدارات القادمة.
+      </p>
     </div>
   </div>
   <div class="section-title" id="sectionTitle"></div>
@@ -1101,20 +1275,24 @@ function normalizeArabic(s){
     .replace(/ة/g, 'ه')
     .toLowerCase();
 }
-const allQuotesFlat = data.flatMap(cat => cat.quotes.map(q => ({
+/* ---------- progressive reveal of volumes across the whole app ----------
+ * كل بيانات الأجزاء (v1 → v35 وvm1/vm2) موجودة كاملة في الكود دائمًا ولا تُحذف أبدًا.
+ * هذه القائمة فقط تتحكم بأي الأجزاء "ظاهرة ومتاحة" الآن في كل مسارات التطبيق:
+ * الفقاعات العائمة، البحث، الفهرس الموضوعي، الفائدة العشوائية، فائدة اليوم، وتصدير PDF.
+ * عندما "نصل" إلى جزء جديد ونستخرج منه فوائد فعلية، يكفي إضافة مفتاحه هنا (مثال: 'v15')
+ * ليظهر تلقائيًا في كل هذه المسارات دفعة واحدة، دون أي تعديل آخر في بقية الكود.
+ *
+ * ملحوظة: سيتم إدراج فوائد بقية أجزاء مجموع الفتاوى تدريجيًا في الإصدارات القادمة.
+ */
+const VISIBLE_VOLUME_KEYS = ['v1','v2','v3','v4','v5','v6','v7','v8','v9','v10'];
+const visibleData = data.filter(cat => VISIBLE_VOLUME_KEYS.includes(cat.key));
+
+const allQuotesFlat = visibleData.flatMap(cat => cat.quotes.map(q => ({
   cat, q,
   _norm: normalizeArabic(q.text + ' ' + q.place + ' ' + q.source)
 })));
 
 /* ---------- topics / synonyms (additive layer — does not alter source data) ---------- */
-/* ---------- progressive reveal of volumes in the floating bubbles ----------
- * كل بيانات الأجزاء (v1 → v35 وvm1/vm2) موجودة كاملة في الكود دائمًا ولا تُحذف أبدًا.
- * هذه القائمة فقط تتحكم بأي الأجزاء تظهر كفقاعة في القائمة الرئيسية الآن.
- * عندما "نصل" إلى جزء جديد ونستخرج منه فوائد فعلية، يكفي إضافة مفتاحه هنا (مثال: 'v15')
- * ليظهر تلقائيًا كفقاعة، دون الحاجة لأي تعديل آخر في بقية الكود.
- */
-const VISIBLE_VOLUME_KEYS = ['v1','v2','v3','v4','v5','v6','v7','v8','v9','v10'];
-
 const TOPICS = [
   { key:'tawheed',  label:'التوحيد والشرك',      icon:'☾', synonyms:['توحيد','شرك','ألوهية','ربوبية','عبادة'] },
   { key:'sifat',    label:'الأسماء والصفات',      icon:'☾', synonyms:['أسماء الله','صفات','تعطيل','تمثيل','تأويل'] },
@@ -1302,7 +1480,7 @@ function buildPages(activeKey){
     if(pages.length === 1) pages.push({isEmptyFav:true});
     return;
   }
-  const cats = activeKey === 'all' ? data : data.filter(c=>c.key===activeKey);
+  const cats = activeKey === 'all' ? visibleData : data.filter(c=>c.key===activeKey);
   const refCat = activeKey === 'all' ? null : cats[0];
   pages = [{isRef:true, cat: refCat}];
   cats.forEach(cat=>{
@@ -1493,6 +1671,65 @@ function render(activeKey){
   renderStatic(0);
 }
 
+/* ---------- fast slide transition (used instead of the book-flip in single-page/mobile mode) ---------- */
+let isSliding = false;
+function slide(direction){
+  if(isSliding || !pages.length) return;
+  let newI;
+  if(direction === 1){
+    if(curI >= pages.length) return;
+    newI = curI + 1;
+  } else {
+    newI = curI - 1;
+    if(newI < 0) return;
+  }
+  isSliding = true;
+  const oldEl = rightSlot.firstElementChild;
+  const newEl = buildPageEl(pages[newI] || null);
+  newEl.style.position = 'absolute';
+  newEl.style.top = '0';
+  newEl.style.insetInlineStart = '0';
+  newEl.style.width = '100%';
+  newEl.style.height = '100%';
+  newEl.style.transition = 'none';
+  newEl.style.transform = direction === 1 ? 'translateX(100%)' : 'translateX(-100%)';
+  newEl.style.opacity = '0';
+  rightSlot.appendChild(newEl);
+  void newEl.offsetWidth;
+
+  requestAnimationFrame(()=>{
+    newEl.style.transition = 'transform .26s ease, opacity .26s ease';
+    newEl.style.transform = 'translateX(0)';
+    newEl.style.opacity = '1';
+    if(oldEl){
+      oldEl.style.transition = 'transform .26s ease, opacity .26s ease';
+      oldEl.style.transform = direction === 1 ? 'translateX(-100%)' : 'translateX(100%)';
+      oldEl.style.opacity = '0';
+    }
+  });
+
+  setTimeout(()=>{
+    if(oldEl && oldEl.parentNode) oldEl.remove();
+    newEl.style.position = '';
+    newEl.style.top = '';
+    newEl.style.insetInlineStart = '';
+    newEl.style.width = '';
+    newEl.style.height = '';
+    newEl.style.transform = '';
+    newEl.style.transition = '';
+    newEl.style.opacity = '';
+    curI = newI;
+    updateHeader(Math.min(curI, pages.length-1));
+    isSliding = false;
+  }, 280);
+}
+
+/* ---------- unified navigation: slide on mobile/single-page, book-flip on desktop/spread ---------- */
+function goTo(direction){
+  if(isSpreadMode()) flip(direction);
+  else slide(direction);
+}
+
 function checkSingleMode(){
   const shouldBeSingle = window.innerWidth < 760;
   const isSingle = document.body.classList.contains('single-page');
@@ -1531,8 +1768,8 @@ function dragEnd(e){
   dragActive = false;
   const dx = getX(e) - dragStartX;
   const threshold = 40;
-  if(dx < -threshold) flip(1);
-  else if(dx > threshold) flip(-1);
+  if(dx < -threshold) goTo(1);
+  else if(dx > threshold) goTo(-1);
 }
 bookStageEl.addEventListener('touchstart', dragStart, {passive:true});
 bookStageEl.addEventListener('touchend', dragEnd);
@@ -1546,7 +1783,7 @@ bookStageEl.addEventListener('mousedown', (e)=>{
 function buildBubbles(){
   const field = document.getElementById('bubbleField');
   field.innerHTML = '';
-  const allTotal = data.reduce((s,c)=>s+c.quotes.length,0);
+  const allTotal = visibleData.reduce((s,c)=>s+c.quotes.length,0);
   const favCount = loadFavorites().length;
   const items = [
       {key:'all', label:'كل الأبواب', icon:'✦', count: allTotal, isAll:true},
@@ -1554,6 +1791,7 @@ function buildBubbles(){
       {key:'preface', label:'مقدمة التطبيق', icon:'📜', count: null, isPreface:true},
       {key:'topics', label:'الفهرس الموضوعي', icon:'📚', count: null, isTopics:true},
       {key:'daily', label:'فائدة اليوم', icon:'🌅', count: null, isDaily:true},
+      {key:'guide', label:'دليل الاستخدام', icon:'❓', count: null, isGuide:true},
     ]
     .concat(
       data
@@ -1562,12 +1800,13 @@ function buildBubbles(){
     )
     .concat([
       {key:'pdf', label:'تحميل الكتاب PDF', icon:'📕', count: allTotal, isPdf:true},
+      {key:'fruits', label:'ثمرات', icon:'🌿', count: null, isFruits:true},
     ]);
 
   items.forEach(it=>{
     const b = document.createElement('div');
     const sizeClass = it.count === null ? '' : (it.count > 20 ? 'bubble-lg' : it.count > 8 ? 'bubble-md' : '');
-    b.className = 'bubble ' + sizeClass + (it.isAll ? ' bubble-all' : '') + (it.isPdf ? ' bubble-pdf' : '') + (it.isPreface ? ' bubble-preface' : '') + (it.isFav ? ' bubble-preface' : '') + (it.isTopics ? ' bubble-preface' : '') + (it.isDaily ? ' bubble-preface' : '');
+    b.className = 'bubble ' + sizeClass + (it.isAll ? ' bubble-all' : '') + (it.isPdf ? ' bubble-pdf' : '') + (it.isPreface ? ' bubble-preface' : '') + (it.isFav ? ' bubble-preface' : '') + (it.isTopics ? ' bubble-preface' : '') + (it.isDaily ? ' bubble-preface' : '') + (it.isGuide ? ' bubble-preface' : '') + (it.isFruits ? ' bubble-fruits' : '');
     b.dataset.key = it.key;
     const dur = (3.4 + Math.random()*2.2).toFixed(2);
     const delay = (-(Math.random()*3)).toFixed(2);
@@ -1576,7 +1815,7 @@ function buildBubbles(){
     b.innerHTML = `
       <div class="b-icon">${it.icon}</div>
       <div class="b-label">${it.label}</div>
-      <div class="b-count">${it.count === null ? (it.isTopics ? 'تصفّح حسب الموضوع' : it.isDaily ? 'فائدة مختارة لهذا اليوم' : 'اقرأها هنا') : (it.count + ' فائدة')}</div>
+      <div class="b-count">${it.count === null ? (it.isTopics ? 'تصفّح حسب الموضوع' : it.isDaily ? 'فائدة مختارة لهذا اليوم' : it.isGuide ? 'كيف تستخدم التطبيق' : it.isFruits ? 'تطبيقاتٌ أخرى للجامع' : 'اقرأها هنا') : (it.count + ' فائدة')}</div>
     `;
     field.appendChild(b);
   });
@@ -1623,6 +1862,16 @@ document.getElementById('bubbleField').addEventListener('click', (e)=>{
     openDailyOverlay();
     return;
   }
+  if(b.dataset.key === 'guide'){
+    closeBubbleMenu();
+    document.getElementById('guideOverlay').classList.add('show');
+    return;
+  }
+  if(b.dataset.key === 'fruits'){
+    closeBubbleMenu();
+    document.getElementById('fruitsOverlay').classList.add('show');
+    return;
+  }
   closeBubbleMenu();
   render(b.dataset.key);
   window.scrollTo({top: document.querySelector('.carousel-wrap').offsetTop - 90, behavior:'smooth'});
@@ -1633,12 +1882,24 @@ document.getElementById('prefaceClose').addEventListener('click', ()=>{
 document.getElementById('prefaceOverlay').addEventListener('click', (e)=>{
   if(e.target.id === 'prefaceOverlay') document.getElementById('prefaceOverlay').classList.remove('show');
 });
+document.getElementById('guideClose').addEventListener('click', ()=>{
+  document.getElementById('guideOverlay').classList.remove('show');
+});
+document.getElementById('guideOverlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'guideOverlay') document.getElementById('guideOverlay').classList.remove('show');
+});
+document.getElementById('fruitsClose').addEventListener('click', ()=>{
+  document.getElementById('fruitsOverlay').classList.remove('show');
+});
+document.getElementById('fruitsOverlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'fruitsOverlay') document.getElementById('fruitsOverlay').classList.remove('show');
+});
 
 /* ---------- PDF selection panel ---------- */
 function buildPdfChecklist(){
   const list = document.getElementById('pdfChecklist');
   list.innerHTML = '';
-  data.forEach(cat=>{
+  visibleData.forEach(cat=>{
     const row = document.createElement('label');
     row.className = 'pdf-check-item';
     row.innerHTML = `<input type="checkbox" value="${cat.key}"><span>${cat.icon} ${cat.label}</span><span class="pc-count">${cat.quotes.length}</span>`;
@@ -1664,7 +1925,7 @@ document.getElementById('pdfSelectNone').addEventListener('click', ()=>{
 });
 document.getElementById('pdfFullBtn').addEventListener('click', ()=>{
   closePdfMenu();
-  generateFullPdfBook(data.map(c=>c.key));
+  generateFullPdfBook(visibleData.map(c=>c.key));
 });
 document.getElementById('pdfConfirmBtn').addEventListener('click', ()=>{
   const selected = Array.from(document.querySelectorAll('#pdfChecklist input:checked')).map(cb=>cb.value);
@@ -2166,7 +2427,7 @@ function pdfCoverCanvas(fontFamily){
   y = PDF_H - 90;
   ctx.fillStyle = c.inkSoft; ctx.font = `13px Tajawal, 'Segoe UI', Tahoma, Arial, sans-serif`;
   ctx.fillText('مصنَّفة حسب أجزاء "مجموع الفتاوى" وعناوينها الأصلية', cx, y); y+=20;
-  const total = data.reduce((s,cat)=>s+cat.quotes.length,0);
+  const total = visibleData.reduce((s,cat)=>s+cat.quotes.length,0);
   ctx.fillText(`عدد الفوائد في هذه الطبعة: ${total.toLocaleString('ar')}`, cx, y);
 
   return canvas;
@@ -2418,7 +2679,7 @@ async function generateFullPdfBook(selectedKeys){
     }
   }
 
-  const isFull = selectedKeys.length === data.length;
+  const isFull = selectedKeys.length === visibleData.length;
   pdf.save(isFull ? 'قبسات-اليقين-من-فتاوى-تقي-الدين.pdf' : 'قبسات-اليقين-مختارات.pdf');
   showToast('تم إنشاء الكتاب وتنزيله بنجاح', 3200);
   pdfGenerating = false;
@@ -2596,8 +2857,8 @@ document.getElementById('fontSelect').addEventListener('change', (e)=>{
   document.documentElement.style.setProperty('--quote-font', `"${e.target.value}", 'Traditional Arabic', Tahoma, Arial, serif`);
 });
 
-document.getElementById('prevArrow').addEventListener('click', ()=> flip(-1));
-document.getElementById('nextArrow').addEventListener('click', ()=> flip(1));
+document.getElementById('prevArrow').addEventListener('click', ()=> goTo(-1));
+document.getElementById('nextArrow').addEventListener('click', ()=> goTo(1));
 
 /* ---------- search wiring ---------- */
 const searchInput = document.getElementById('searchInput');
@@ -2666,7 +2927,7 @@ document.getElementById('jumpInput').addEventListener('keydown', (e)=>{
 checkSingleMode();
 buildBubbles();
 (function renderQuoteCounter(){
-  const total = data.reduce((sum, cat) => sum + cat.quotes.length, 0);
+  const total = visibleData.reduce((sum, cat) => sum + cat.quotes.length, 0);
   const el = document.getElementById('quoteCounter');
   const arabicDigits = String(total).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
   if(el) el.textContent = `يتضمن ${arabicDigits} فائدة`;
