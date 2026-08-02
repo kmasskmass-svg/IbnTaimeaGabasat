@@ -89,7 +89,6 @@
     border-radius:999px; padding:4px 16px; margin:6px 0 8px; letter-spacing:.02em;
   }
   .progressive-note{color:var(--ink-soft); font-size:11.5px; opacity:.8; margin:0 0 10px;}
-  .notice{max-width:680px; margin:10px auto 0; font-size:12.5px; color:var(--accent-dark); background:rgba(15,92,83,.08); border:1px solid var(--line); border-radius:10px; padding:10px 16px; line-height:1.9;}
 
   .toolbar{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; margin:22px 0 8px;}
   .tool-btn{
@@ -260,6 +259,9 @@
   .resume-chip .rc-go:hover{filter:brightness(1.12);}
   .resume-chip .rc-x{cursor:pointer; opacity:.55; padding:0 4px; font-size:13px;}
   .resume-chip .rc-x:hover{opacity:1;}
+  .resume-chip + .resume-chip{margin-top:8px;}
+  .update-chip{border-color:var(--gold-light);}
+  .update-chip .rc-go{background:var(--gold); color:#3a2c10;}
 
   /* احترام تفضيل المستخدم بتقليل الحركة (مهمّ لمن يتأذّى بالحركة الدائمة) */
   @media (prefers-reduced-motion: reduce){
@@ -462,7 +464,6 @@
     .dua-line{font-size:11px;}
     .kicker{font-size:11.5px;}
     .subtitle{font-size:14px; padding:0 4px;}
-    .notice{font-size:12px; padding:9px 13px;}
     .toolbar{margin:18px 0 6px;}
     .tool-btn{font-size:13px; padding:8px 14px;}
     .panel{padding:16px 14px; border-radius:12px;}
@@ -515,12 +516,14 @@
       <button type="button" class="rc-go" id="resumeGoBtn">تابع القراءة</button>
       <span class="rc-x" id="resumeDismiss" title="إخفاء">✕</span>
     </div>
+    <div class="resume-chip update-chip" id="updateBanner" role="status">
+      <span id="updateBannerText">🔄 نسخة أحدث من الكتاب متوفرة</span>
+      <button type="button" class="rc-go" id="updateReloadBtn">تحديث الآن</button>
+      <span class="rc-x" id="updateDismiss" title="إخفاء">✕</span>
+    </div>
     <p class="compiler-line">جمع كليب بن أحمد بن ضيف الله الزهراني</p>
     <p class="dua-line">غفر الله له ولوالديه ولزوجه وأصلح له في ذريته...</p>
     <p class="subtitle">مجموعة أقوال وفتاوى شيخ الإسلام أحمد بن تيمية الحرّاني (٦٦١ – ٧٢٨ هـ)، قابلة للتصدير كبطاقة صورة ومشاركتها، ومبوّبة في أبواب العلم المختلفة</p>
-    <p class="notice">
-      ملاحظة: على كل بطاقة زران فقط: تنزيل الصورة، ومشاركتها عبر واتساب. على الجوال يفتح زر واتساب قائمة المشاركة الأصلية ليختار المستخدم واتساب فتُرسَل الصورة نفسها. على الحاسوب يمنع واتساب إرفاق الصور عبر الروابط لأسباب أمنية من عنده، فيُنزَّل الملف تلقائيًا مع فتح واتساب ليُرفَق يدويًا.
-    </p>
   </header>
 
   <div class="toolbar">
@@ -685,20 +688,32 @@
         <li><strong>🎨 المظهر:</strong> من قائمة التخصيص غيّر ألوان السمة، وحجم البطاقة، والإطار، ونوع الخط العربي — وتُحفظ اختياراتك فتعود كما تركتها في كل زيارة.</li>
         <li><strong>💾 نسخة احتياطية:</strong> من قائمة التخصيص احفظ مفضلتك وملاحظاتك في ملفٍ واحد، واستعدها متى شئت أو انقلها إلى جهازٍ آخر. وهذا مهم؛ لأن ما يُحفظ في المتصفح يُمحى بمسح بيانات التصفح.</li>
         <li><strong>▶ تابع القراءة:</strong> يتذكّر التطبيق آخر فائدةٍ وقفتَ عندها، ويعرض لك عند فتحه زرًّا يعيدك إليها مباشرة.</li>
+        <li><strong>🔄 تنبيه الفوائد الجديدة:</strong> إن أُضيفت فوائد جديدة منذ زيارتك السابقة يظهر لك تنبيهٌ بذلك عند فتح التطبيق، وإن بقيت الصفحة مفتوحة طويلًا يفحص التطبيق بين حينٍ وآخر هل صدرت فوائد جديدة، فيعرض لك زر "تحديث الآن" إن وُجدت.</li>
       </ul>
       <p class="preface-bism" style="font-size:16px; margin-top:20px;">📤 مشاركة فائدة</p>
       <ul class="preface-list">
         <li><strong>⭳ تحميل كصورة:</strong> يحوّل البطاقة الحالية إلى صورة أنيقة تُحفظ على جهازك.</li>
-        <li><strong>✆ واتساب:</strong> يفتح مشاركة مباشرة للبطاقة كصورة عبر واتساب (أو تطبيق المشاركة في جهازك).</li>
+        <li><strong>✆ واتساب:</strong> على الجوال يفتح قائمة المشاركة في جهازك لتختار واتساب فتُرسَل الصورة نفسها. وعلى الحاسوب يمنع واتساب إرفاقَ الصور عبر الروابط لأسبابٍ أمنيةٍ من عنده، فيُنزَّل الملف تلقائيًا ويُفتح واتساب لترفقه بنفسك.</li>
         <li><strong>✈ تيليجرام و 𝕏 (تويتر):</strong> يفتحان نافذة مشاركة جاهزة بنص الفائدة ورابطها في تلك المنصة مباشرة.</li>
         <li><strong>📋 نسخ النص:</strong> ينسخ نص الفائدة مع مصدرها إلى الحافظة، لمن أراد النص مجرّدًا لا صورة.</li>
         <li><strong>🔗 نسخ الرابط:</strong> ينسخ رابطًا خاصًا بهذه الفائدة تحديدًا، يفتح عند زيارته نفس الفائدة مباشرة لمن أرسلته له. والرابط ثابتٌ لا يتغيّر مدلولُه مهما أُضيف من فوائد جديدة.</li>
         <li><strong>🖨 طباعة:</strong> يفتح تصميم طباعة نظيف لهذه الفائدة لطباعتها ورقيًا.</li>
       </ul>
-      <p class="preface-bism" style="font-size:16px; margin-top:20px;">📄 تنزيل الكتاب كاملًا</p>
+      <p class="preface-bism" style="font-size:16px;">📄 تنزيل الكتاب كاملًا</p>
       <ul class="preface-list">
         <li>من فقاعة "تنزيل PDF"، يمكنك اختيار أبواب معينة أو الكتاب كاملًا، وتنزيله كملف PDF منسّق بغلاف ومقدمة وترقيم صفحات.</li>
       </ul>
+      <p class="preface-bism" style="font-size:16px; margin-top:20px;">📖 المرجع الرئيس للفوائد</p>
+      <table class="ref-table">
+        <tr><td>الكتاب</td><td>مجموع الفتاوى</td></tr>
+        <tr><td>المؤلف</td><td>شيخ الإسلام أحمد بن تيمية</td></tr>
+        <tr><td>جمع وترتيب</td><td>عبد الرحمن بن محمد بن قاسم رحمه الله</td></tr>
+        <tr><td>ساعده</td><td>ابنه محمد وفّقه الله</td></tr>
+        <tr><td>الناشر</td><td>مجمع الملك فهد لطباعة المصحف الشريف، المدينة المنورة، السعودية</td></tr>
+        <tr><td>عام النشر</td><td>١٤٢٥هـ - ٢٠٠٤م</td></tr>
+        <tr><td>الأبواب المتاحة الآن</td><td id="guideVolumeCount">—</td></tr>
+      </table>
+      <div class="ref-note">مصنّفة حسب أجزاء "مجموع الفتاوى" وعناوينها الأصلية؛ وسيتم -بإذن الله- إدراج فوائد بقية الأجزاء تدريجيًا في الإصدارات القادمة.</div>
     </div>
   </div>
 
@@ -1204,6 +1219,10 @@ const data = [
     { text:"تَارَةً يَخْتَلِفُ [الْأَفْضَلُ] بِاخْتِلَافِ مَرْتَبَةِ جِنْسِ الْعِبَادَةِ: فَالْجِهَادُ لِلرِّجَالِ أَفْضَلُ مِنْ الْحَجِّ وَأَمَّا النِّسَاءُ فَجِهَادُهُنَّ الْحَجُّ، وَالْمَرْأَةُ الْمُتَزَوِّجَةُ طَاعَتُهَا لِزَوْجِهَا أَفْضَلُ مِنْ طَاعَتِهَا لِأَبَوَيْهَا؛ بِخِلَافِ الْأَيِّمَةِ فَإِنَّهَا مَأْمُورَةٌ بِطَاعَةِ أَبَوَيْهَا. وَتَارَةً يَخْتَلِفُ بِاخْتِلَافِ حَالِ قُدْرَةِ الْعَبْدِ وَعَجْزِهِ: فَمَا يَقْدِرُ عَلَيْهِ مِنْ الْعِبَادَاتِ أَفْضَلُ فِي حَقِّهِ مِمَّا يَعْجِزُ عَنْهُ وَإِنْ كَانَ جِنْسُ الْمَعْجُوزِ عَنْهُ أَفْضَلَ وَهَذَا بَابٌ وَاسِعٌ يَغْلُو فِيهِ كَثِيرٌ مِنْ النَّاسِ وَيَتَّبِعُونَ أَهْوَاءَهُمْ", source:"مجموع الفتاوى، ج١٠ ص٤٢٧", place:"في بيان أن الأفضل من العبادات يختلف بحسب مرتبة جنس العبادة، وبحسب حال قدرة العبد وعجزه؛ وفيه أمثلة من الجهاد والحج وطاعة المرأة لزوجها وأبويها" },
     { text:"مِنْ النَّاسِ مَنْ يَرَى أَنَّ الْعَمَلَ إذَا كَانَ أَفْضَلَ فِي حَقِّهِ لِمُنَاسَبَةِ لَهُ وَلِكَوْنِهِ أَنْفَع لِقَلْبِهِ وَأَطْوَع لِرَبِّهِ يُرِيدُ أَنْ يَجْعَلَهُ أَفْضَلَ لِجَمِيعِ النَّاسِ وَيَأْمُرَهُمْ بِمِثْلِ ذَلِكَ. وَاَللَّهُ بَعَثَ مُحَمَّدًا بِالْكِتَابِ وَالْحِكْمَةِ وَجَعَلَهُ رَحْمَةً لِلْعِبَادِ وَهَدْيًا لَهُمْ يَأْمُرُ كُلَّ إنْسَانٍ بِمَا هُوَ أَصْلَحُ لَهُ فَعَلَى الْمُسْلِمِ أَنْ يَكُونَ نَاصِحًا لِلْمُسْلِمِينَ يَقْصِدُ لِكُلِّ إنْسَانٍ مَا هُوَ أَصْلَحُ لَهُ", source:"مجموع الفتاوى، ج١٠ ص٤٢٨", place:"في التحذير من تعميم ما هو أفضل في حق الشخص بعينه على جميع الناس، وبيان أن النبي صلى الله عليه وسلم كان يأمر كل إنسان بما هو أصلح له، وأن على المسلم أن يكون ناصحًا يقصد لكل إنسان ما يصلحه" },
     { text:"مِنْ النَّاسِ مَنْ يَكُونُ تَطَوُّعُهُ بِالْعِلْمِ أَفْضَلَ لَهُ وَمِنْهُمْ مَنْ يَكُونُ تَطَوُّعُهُ بِالْجِهَادِ أَفْضَلَ وَمِنْهُمْ مَنْ يَكُونُ تَطَوُّعُهُ بِالْعِبَادَاتِ الْبَدَنِيَّةِ - كَالصَّلَاةِ وَالصِّيَامِ - أَفْضَلَ لَهُ وَالْأَفْضَلُ الْمُطْلَقُ مَا كَانَ أَشْبَهَ بِحَالِ النَّبِيِّ صلى الله عليه وسلم بَاطِنًا وَظَاهِرًا. فَإِنَّ خَيْرَ الْكَلَامِ كَلَامُ اللَّهِ وَخَيْرَ الْهَدْيِ هَدْيُ مُحَمَّدٍ صلى الله عليه وسلم", source:"مجموع الفتاوى، ج١٠ ص٤٢٨", place:"في بيان أن الأفضل من التطوع يختلف باختلاف الأشخاص: فمنهم من الأفضل له تطوعه بالعلم، ومنهم من الأفضل له الجهاد، ومنهم من الأفضل له العبادات البدنية؛ وأن الأفضل المطلق ما كان أشبه بحال النبي صلى الله عليه وسلم باطنًا وظاهرًا" },
+    { text:"التَّقْوَى أَنْ يَعْمَلَ الرَّجُلُ بِطَاعَةِ اللَّهِ عَلَى نُورٍ مِنْ اللَّهِ يَرْجُو رَحْمَةَ اللَّهِ وَأَنْ يَتْرُكَ مَعْصِيَةَ اللَّهِ عَلَى نُورٍ مِنْ اللَّهِ يَخَافُ عَذَابَ اللَّهِ وَلَا يَتَقَرَّبُ وَلِيُّ اللَّهِ إلَّا بِأَدَاءِ فَرَائِضِهِ ثُمَّ بِأَدَاءِ نَوَافِلِهِ. قَالَ تَعَالَى: ﴿وَمَا تَقَرَّبَ إلَيَّ عَبْدِي بِمِثْلِ أَدَاءِ مَا افْتَرَضْت عَلَيْهِ وَلَا يَزَالُ عَبْدِي يَتَقَرَّبُ إلَيَّ بِالنَّوَافِلِ حَتَّى أُحِبَّهُ﴾ كَمَا جَاءَ فِي الْحَدِيثِ الصَّحِيحِ الْإِلَهِيِّ الَّذِي رَوَاهُ الْبُخَارِيُّ", source:"مجموع الفتاوى، ج١٠ ص٤٣٣", place:"في تعريف التقوى بأنها العمل بطاعة الله على نورٍ منه رجاءَ رحمته، وترك معصيته على نورٍ منه خوفَ عذابه، وأن وليّ الله لا يتقرّب إليه إلا بأداء الفرائض ثم النوافل، مستشهدًا بالحديث القدسي الذي رواه البخاري" },
+    { text:"مِنْ أَحَبِّ الْأَعْمَالِ إلَى اللَّهِ وَأَعْظَمِ الْفَرَائِضِ عِنْدَهُ الصَّلَوَاتُ الْخَمْسُ فِي مَوَاقِيتِهَا وَهِيَ أَوَّلُ مَا يُحَاسَبُ عَلَيْهَا الْعَبْدُ مِنْ عَمَلِهِ يَوْمَ الْقِيَامَةِ وَهِيَ الَّتِي فَرَضَهَا اللَّهُ تَعَالَى بِنَفْسِهِ لَيْلَةَ الْمِعْرَاجِ لَمْ يَجْعَلْ فِيهَا بَيْنَهُ وَبَيْنَ مُحَمَّدٍ وَاسِطَةً وَهِيَ عَمُودُ الْإِسْلَامِ الَّذِي لَا يَقُومُ إلَّا بِهِ وَهِيَ أَهَمُّ أَمْرِ الدِّينِ كَمَا كَانَ أَمِيرُ الْمُؤْمِنِينَ عُمَرُ بْنُ الْخَطَّابِ يَكْتُبُ إلَى عُمَّالِهِ: إنَّ أَهَمَّ أَمْرِكُمْ عِنْدِي الصَّلَاةُ فَمَنْ حَفِظَهَا وَحَافَظَ عَلَيْهَا حَفِظَ دِينَهُ وَمَنْ ضَيَّعَهَا كَانَ لِمَا سِوَاهَا مِنْ عَمَلِهِ أَشَدَّ إضَاعَةً. وَقَدْ ثَبَتَ فِي الصَّحِيحِ عَنْ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ قَالَ: {بَيْنَ الْعَبْدِ وَبَيْنَ الشِّرْكِ تَرْكُ الصَّلَاةِ}", source:"مجموع الفتاوى، ج١٠ ص٤٣٣", place:"في بيان مكانة الصلوات الخمس؛ أنها من أحب الأعمال إلى الله وأعظم الفرائض، وأول ما يُحاسب عليه العبد يوم القيامة، وأنها فُرضت ليلة المعراج بلا واسطة، وأنها عمود الإسلام، مستشهدًا بأثر عمر بن الخطاب وحديث «بين العبد وبين الشرك ترك الصلاة»" },
+    { text:"الصَّلَاةُ أَفْضَلُ الْعِبَادَاتِ كَمَا فِي الصَّحِيحَيْنِ عَنْ ابْنِ مَسْعُودٍ أَنَّهُ قَالَ: قُلْت لِلنَّبِيِّ صلى الله عليه وسلم أَيُّ الْعَمَلِ أَحَبُّ إلَى اللَّهِ؟ قَالَ: الصَّلَاةُ عَلَى وَقْتِهَا. قُلْت: ثُمَّ أَيُّ؟ قَالَ: بِرُّ الْوَالِدَيْنِ. قُلْت: ثُمَّ أَيُّ؟ قَالَ: الْجِهَادُ. قَالَ حَدَّثَنِي بِهِنَّ رَسُولُ اللَّهِ صلى الله عليه وسلم وَلَوْ اسْتَزَدْته لَزَادَنِي. وَثَبَتَ أَيْضًا فِي الصَّحِيحَيْنِ عَنْهُ أَنَّهُ جَعَلَ أَفْضَلَ الْأَعْمَالِ إيمَانٌ بِاَللَّهِ وَجِهَادٌ فِي سَبِيلِهِ ثُمَّ الْحَجُّ الْمَبْرُورُ. وَلَا مُنَافَاةَ بَيْنَهُمَا؛ فَإِنَّ الصَّلَاةَ دَاخِلَةٌ فِي مُسَمَّى الْإِيمَانِ بِاَللَّهِ كَمَا دَخَلَتْ فِي قَوْله تَعَالَى ﴿وَمَا كَانَ اللَّهُ لِيُضِيعَ إيمَانَكُمْ﴾ قَالَ الْبَرَاءُ بْنُ عَازِبٍ وَغَيْرُهُ مِنْ السَّلَفِ: أَيْ صَلَاتُكُمْ إلَى بَيْتِ الْمَقْدِسِ", source:"مجموع الفتاوى، ج١٠ ص٤٣٩", place:"في بيان أن الصلاة أفضل العبادات لحديث ابن مسعود، وذكر حديثٍ آخر جعل أفضل الأعمال الإيمان بالله والجهاد ثم الحج المبرور، ودفع التنافي بينهما بأن الصلاة داخلة في مسمى الإيمان بالله كما في تفسير السلف لقوله تعالى ﴿وما كان الله ليضيع إيمانكم﴾ أي صلاتكم إلى بيت المقدس" },
+    { text:"الصَّلَاةُ كَالْإِيمَانِ لَا تَدْخُلُهَا النِّيَابَةُ بِحَالٍ فَلَا يُصَلِّي أَحَدٌ عَنْ أَحَدٍ الْفَرْضَ لَا لِعُذْرٍ وَلَا لِغَيْرِ عُذْرٍ كَمَا لَا يُؤْمِنُ أَحَدٌ عَنْهُ وَلَا تَسْقُطُ بِحَالٍ كَمَا لَا يَسْقُطُ الْإِيمَانُ؛ بَلْ عَلَيْهِ الصَّلَاةُ مَا دَامَ عَقْلُهُ حَاضِرًا وَهُوَ مُتَمَكِّنٌ مِنْ فِعْلِ بَعْضِ أَفْعَالِهَا فَإِذَا عَجَزَ عَنْ جَمِيعِ الْأَفْعَالِ وَلَمْ يَقْدِرْ عَلَى الْأَقْوَالِ فَهَلْ يُصَلِّي بِتَحْرِيكِ طَرْفِهِ وَيَسْتَحْضِرُ الْأَفْعَالَ بِقَلْبِهِ؟ فِيهِ قَوْلَانِ لِلْعُلَمَاءِ وَإِنْ كَانَ الْأَظْهَرُ أَنَّ هَذَا غَيْرُ مَشْرُوعٍ", source:"مجموع الفتاوى، ج١٠ ص٤٣٩", place:"في بيان أن الصلاة كالإيمان لا تدخلها النيابة ولا تسقط بحالٍ، بل تلزم العبد ما دام عقله حاضرًا ومتمكنًا من بعض أفعالها، وذكر الخلاف فيمن عجز عن جميع الأفعال والأقوال هل يصلي بتحريك طرفه، مع ترجيح أن هذا غير مشروع" },
   ]},
   { key:"v15", label:"ج١٥: التفسير ٢ (الأعراف - الأحزاب)", icon:"📖", quotes:[
     { text:"قد يكونُ العذابُ من عندِ اللهِ، وقد يكونُ بأيدي العبادِ، فإذا تركَ الناسُ الجهادَ في سبيلِ اللهِ فقد يبتليهم بأن يوقعَ بينهم العداوةَ، أمّا إذا اشتغلوا بالجهادِ جمعَ اللهُ قلوبَهم وألّفَ بينهم", source:"مجموع الفتاوى، ج١٥ ص٤٤", place:"في تفسير آيات الابتلاء بالفرقة" },
@@ -1466,6 +1485,10 @@ function normalizeArabic(s){
 const VISIBLE_VOLUME_KEYS = ['v1','v2','v3','v4','v5','v6','v7','v8','v9','v10'];
 const visibleData = data.filter(cat => VISIBLE_VOLUME_KEYS.includes(cat.key));
 
+/* عددٌ إجماليٌّ لكل الفوائد المكتوبة في الملف (الظاهرة والمُعدّة للأجزاء القادمة)،
+ * يُستخدم فقط كمقياس "هل الملف نما؟" لتنبيهات التحديث أدناه؛ لا يُعرض للمستخدم مباشرة. */
+const TOTAL_ALL_QUOTES = data.reduce((s,c)=>s+c.quotes.length, 0);
+
 const allQuotesFlat = visibleData.flatMap(cat => cat.quotes.map(q => ({
   cat, q,
   _norm: normalizeArabic(q.text + ' ' + q.place + ' ' + q.source)
@@ -1517,7 +1540,7 @@ function topicMatches(topic){
 
 function jumpToSpecificQuote(cat, q){
   render(cat.key);
-  const idx = pages.findIndex(p => !p.isRef && !p.isFavRef && !p.isEmptyFav && !p.isTopicRef && !p.isEmptyTopic && p.q === q);
+  const idx = pages.findIndex(p => !p.isFavRef && !p.isEmptyFav && !p.isTopicRef && !p.isEmptyTopic && p.q === q);
   renderStatic(idx < 0 ? 0 : idx);
   const wrap = document.querySelector('.carousel-wrap');
   if(wrap) window.scrollTo({top: wrap.offsetTop - 90, behavior:'smooth'});
@@ -1613,28 +1636,14 @@ function cardHTML(cat, q){
   `;
 }
 
-function refSlideHTML(cat){
-  const volRow = cat
-    ? `<tr><td>المجلد المعروض</td><td>${cat.label}</td></tr>`
-    : `<tr><td>المجلد المعروض</td><td>جميع الأجزاء (٢١ بابًا)</td></tr>`;
-  return `
-    <span class="badge ref-badge">📖 المرجع</span>
-    <div class="ref-title">المرجع الرئيس للفوائد</div>
-    <table class="ref-table">
-      <tr><td>الكتاب</td><td>مجموع الفتاوى</td></tr>
-      <tr><td>المؤلف</td><td>شيخ الإسلام أحمد بن تيمية</td></tr>
-      <tr><td>جمع وترتيب</td><td>عبد الرحمن بن محمد بن قاسم رحمه الله</td></tr>
-      <tr><td>ساعده</td><td>ابنه محمد وفّقه الله</td></tr>
-      <tr><td>الناشر</td><td>مجمع الملك فهد لطباعة المصحف الشريف، المدينة المنورة، السعودية</td></tr>
-      <tr><td>عام النشر</td><td>١٤٢٥هـ - ٢٠٠٤م</td></tr>
-      ${volRow}
-    </table>
-    <div class="ref-note">مصنّفة حسب أجزاء "مجموع الفتاوى" وعناوينها الأصلية؛ الأجزاء التي لم يصلنا اسمها بعد موسومة بـ"بانتظار العنوان" حتى تُعرف.</div>
-  `;
-}
+/* بطاقة "المرجع الرئيس" كانت تُقحَم صفحةً إضافية في مقدّمة كل تصفّح (فيزيد عدد الصفحات
+ * بمقدار واحد عن عدد الفوائد الفعلي، ومن هنا كان يظهر "١ من ٣١٠" مع أن الفوائد ٣٠٩)،
+ * وكانت خانة "المجلد المعروض" فيها ثابتةً لا تتحدّث ("جميع الأجزاء ٢١ بابًا" دائمًا
+ * حتى عند تصفّح جزءٍ واحد، وحتى بعد أن صار الظاهر عشرة أبواب لا واحدًا وعشرين).
+ * محتواها ثابتٌ لا يختلف باختلاف الباب المفتوح، فنُقل مرةً واحدة إلى دليل الاستخدام. */
 
 /* ---------- pages / book model ---------- */
-let pages = [];       // flat list of {isRef:true, cat} or {cat,q}
+let pages = [];       // flat list of {cat,q} (plus special marker pages: isFavRef/isEmptyFav/isTopicRef/isEmptyTopic)
 let curI = 0;          // index of the page currently resting at the right/front position
 
 function buildPages(activeKey){
@@ -1650,19 +1659,15 @@ function buildPages(activeKey){
   if(activeKey === 'favorites'){
     const favs = loadFavorites();
     pages = [{isFavRef:true}];
-    favs.forEach(id=>{
-      const sep = id.lastIndexOf('::');
-      const catKey = id.slice(0, sep);
-      const idx = parseInt(id.slice(sep+2), 10);
-      const cat = data.find(c=>c.key===catKey);
-      if(cat && cat.quotes[idx]) pages.push({cat, q:cat.quotes[idx]});
+    favs.forEach(uid=>{
+      const found = findQuoteByUid(uid);
+      if(found) pages.push({cat:found.cat, q:found.q});
     });
     if(pages.length === 1) pages.push({isEmptyFav:true});
     return;
   }
   const cats = activeKey === 'all' ? visibleData : data.filter(c=>c.key===activeKey);
-  const refCat = activeKey === 'all' ? null : cats[0];
-  pages = [{isRef:true, cat: refCat}];
+  pages = [];
   cats.forEach(cat=>{
     cat.quotes.forEach(q=> pages.push({cat, q}));
   });
@@ -1685,12 +1690,12 @@ function buildPageEl(item){
   } else if(item.isEmptyTopic){
     div.innerHTML = `<div class="page-empty">📚<br><span style="font-size:14px; margin-top:10px; display:inline-block;">لم نجد فوائد مطابقة لموضوع "${item.topic ? item.topic.label : ''}" بعد</span></div>`;
   } else {
-    div.innerHTML = item.isRef ? refSlideHTML(item.cat) : cardHTML(item.cat, item.q);
+    div.innerHTML = cardHTML(item.cat, item.q);
   }
-  const isSpecial = item.isRef || item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
+  const isSpecial = item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
   div._q = isSpecial ? null : item.q;
   div._catKey = isSpecial ? null : item.cat.key;
-  div._catLabel = item.isRef ? 'المرجع' : (item.isFavRef || item.isEmptyFav) ? 'المفضلة' : (item.isTopicRef || item.isEmptyTopic) ? (item.topic ? item.topic.label : 'موضوع') : item.cat.label;
+  div._catLabel = (item.isFavRef || item.isEmptyFav) ? 'المفضلة' : (item.isTopicRef || item.isEmptyTopic) ? (item.topic ? item.topic.label : 'موضوع') : item.cat.label;
   return div;
 }
 
@@ -1719,8 +1724,7 @@ function updateHeader(i){
   const sectionTitleEl = document.getElementById('sectionTitle');
   const bar = document.getElementById('progressBar');
   const item = pages[Math.max(0, Math.min(i, pages.length-1))];
-  sectionTitleEl.textContent = item.isRef ? '📖  المرجع الرئيس'
-    : (item.isFavRef || item.isEmptyFav) ? '⭐  المفضلة'
+  sectionTitleEl.textContent = (item.isFavRef || item.isEmptyFav) ? '⭐  المفضلة'
     : (item.isTopicRef || item.isEmptyTopic) ? ('📚  ' + (item.topic ? item.topic.label : 'موضوع'))
     : (item.cat.icon + '  ' + item.cat.label);
   const shown = isSpreadMode()
@@ -1732,7 +1736,7 @@ function updateHeader(i){
 
 /* ---------- permalink (deep link) for the currently shown quote ---------- */
 function updatePermalink(item){
-  const isSpecial = !item || item.isRef || item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
+  const isSpecial = !item || item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
   if(isSpecial || !item.q || !item.cat) return;
   const newHash = '#f=' + quoteUid(item.cat.key, item.q);
   if(location.hash !== newHash){
@@ -1803,7 +1807,7 @@ function openFromHash(){
 
   if(!cat || !q) return false;
   render(cat.key);
-  const pIdx = pages.findIndex(p => !p.isRef && p.q === q);
+  const pIdx = pages.findIndex(p => p.q === q);
   renderStatic(pIdx < 0 ? 0 : pIdx);
   return true;
 }
@@ -2104,7 +2108,7 @@ document.getElementById('bubbleField').addEventListener('click', (e)=>{
   }
   if(b.dataset.key === 'guide'){
     closeBubbleMenu();
-    document.getElementById('guideOverlay').classList.add('show');
+    openGuideOverlay();
     return;
   }
   if(b.dataset.key === 'fruits'){
@@ -2260,6 +2264,16 @@ function buildDailyOverlay(){
   }
   renderDailyNotifyBtn();
 }
+function openGuideOverlay(){
+  const el = document.getElementById('guideVolumeCount');
+  if(el){
+    const n = visibleData.length;
+    const arabicN = String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    el.textContent = `${arabicN} أبواب حاليًا، وتُدرَج بقية أبواب الكتاب تدريجيًا`;
+  }
+  document.getElementById('guideOverlay').classList.add('show');
+}
+
 function openDailyOverlay(){
   buildDailyOverlay();
   document.getElementById('dailyOverlay').classList.add('show');
@@ -3493,6 +3507,76 @@ buildBubbles();
     jumpToUid(pos.uid);
   });
   dismiss.addEventListener('click', ()=> chip.classList.remove('show'));
+})();
+
+/* ---------- تنبيهٌ محلّي: "أُضيفت فوائد جديدة منذ زيارتك السابقة" ----------
+ * يقارن عدد الفوائد الآن بعدد آخر زيارةٍ محفوظ على هذا الجهاز؛ يعمل تلقائيًّا
+ * ولا يحتاج أي صيانةٍ يدوية، لأنه يُحسب من طول مصفوفة البيانات نفسها. */
+(function notifyNewSinceLastVisit(){
+  const KEY = 'qabasat_seen_total_v1';
+  let last = null;
+  try{
+    const raw = localStorage.getItem(KEY);
+    last = raw ? parseInt(raw, 10) : null;
+  }catch(e){ return; }
+
+  if(last !== null && TOTAL_ALL_QUOTES > last){
+    const added = TOTAL_ALL_QUOTES - last;
+    const arAdded = String(added).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    setTimeout(()=> showToast(`🌱 أُضيفت ${arAdded} فائدة جديدة منذ زيارتك السابقة`, 5000), 900);
+  }
+  try{ localStorage.setItem(KEY, String(TOTAL_ALL_QUOTES)); }catch(e){}
+})();
+
+/* ---------- تنبيهٌ حيّ: يكتشف نسخةً أحدث أثناء بقاء الصفحة مفتوحة ----------
+ * يفحص الصفحةَ نفسها من الخادم بين حينٍ وآخر (لا يعتمد على ذاكرة التخزين المؤقت)،
+ * ويقارن عدد الفوائد فيها بعدد الفوائد في النسخة المفتوحة الآن. مفيدٌ لمن يترك
+ * التبويب مفتوحًا طويلًا، إذ لن يرى المحتوى الجديد إلا بإعادة تحميل الصفحة. */
+(function setupRemoteUpdateChecker(){
+  const banner = document.getElementById('updateBanner');
+  const textEl = document.getElementById('updateBannerText');
+  const reloadBtn = document.getElementById('updateReloadBtn');
+  const dismiss = document.getElementById('updateDismiss');
+  if(!banner || typeof fetch !== 'function') return;
+  if(location.protocol === 'file:') return; // لا يعمل الجلب عند فتح الملف محليًا بلا خادم
+
+  let lastCheckAt = 0;
+  let lastNotifiedCount = TOTAL_ALL_QUOTES;
+  const MIN_INTERVAL = 5 * 60 * 1000;   // لا تُكثر الطلبات: كل خمس دقائق كحدٍّ أدنى
+  const POLL_INTERVAL = 15 * 60 * 1000; // فحصٌ دوري كل ربع ساعة إن بقيت الصفحة مفتوحة ومرئية
+
+  function showBanner(remoteCount){
+    if(remoteCount <= lastNotifiedCount) return;
+    lastNotifiedCount = remoteCount;
+    const added = remoteCount - TOTAL_ALL_QUOTES;
+    const arAdded = String(added).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    textEl.textContent = `🔄 أُضيفت ${arAdded} فائدة جديدة — حدّث الصفحة لرؤيتها`;
+    banner.classList.add('show');
+  }
+
+  function checkForRemoteUpdate(){
+    const now = Date.now();
+    if(now - lastCheckAt < MIN_INTERVAL) return;
+    lastCheckAt = now;
+    fetch(location.href, { cache:'no-store' })
+      .then(r => r.ok ? r.text() : null)
+      .then(text => {
+        if(!text) return;
+        // المعيار مقسومٌ عبر جمع سلسلتين حتى لا يطابق هذا السطرَ نفسه عند فحص نصّ الصفحة المجلوبة
+        const marker = '",' + ' place:"';
+        const remoteCount = text.split(marker).length - 1;
+        if(remoteCount > TOTAL_ALL_QUOTES) showBanner(remoteCount);
+      })
+      .catch(()=>{ /* لا اتصال أو حجب مؤقت؛ ليس خطأً يستحق إزعاج المستخدم */ });
+  }
+
+  reloadBtn.addEventListener('click', ()=> location.reload());
+  dismiss.addEventListener('click', ()=> banner.classList.remove('show'));
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState === 'visible') checkForRemoteUpdate();
+  });
+  window.addEventListener('focus', checkForRemoteUpdate);
+  setInterval(checkForRemoteUpdate, POLL_INTERVAL);
 })();
 
 (function renderQuoteCounter(){
