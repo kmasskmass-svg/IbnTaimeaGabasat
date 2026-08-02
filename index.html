@@ -4,10 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ</title>
+<meta name="description" content="فوائد منتقاة وموثّقة من كتاب «مجموع الفتاوى» لشيخ الإسلام ابن تيمية، مبوّبة حسب الأجزاء والموضوعات، مع بحثٍ وفهرسٍ موضوعي وتصديرٍ كبطاقاتٍ وصور وملف PDF. جمع: كليب بن أحمد بن ضيف الله الزهراني.">
+<meta name="author" content="كليب بن أحمد بن ضيف الله الزهراني">
+<meta name="keywords" content="ابن تيمية, مجموع الفتاوى, فوائد, شيخ الإسلام, عقيدة, فقه, تفسير">
+<meta name="theme-color" content="#0f5c53">
+<meta name="color-scheme" content="light dark">
+
+<!-- بطاقة المشاركة في واتساب وتويتر وتيليجرام -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:site_name" content="قَبَسَاتُ اليَقِينِ">
+<meta property="og:title" content="قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ">
+<meta property="og:description" content="فوائد منتقاة وموثّقة من «مجموع الفتاوى» لشيخ الإسلام ابن تيمية، مبوّبة ومفهرسة، تُشارَك كبطاقاتٍ أنيقة.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ">
+<meta name="twitter:description" content="فوائد منتقاة وموثّقة من «مجموع الفتاوى» لشيخ الإسلام ابن تيمية، مبوّبة ومفهرسة، تُشارَك كبطاقاتٍ أنيقة.">
+<!-- لإظهار صورة في بطاقة المشاركة: ارفع صورة (١٢٠٠×٦٣٠) باسم cover.jpg بجوار هذا الملف ثم أزل التعليق عن السطرين التاليين
+<meta property="og:image" content="https://kmasskmass-svg.github.io/IbnTaimeaGabasat/cover.jpg">
+<meta name="twitter:image" content="https://kmasskmass-svg.github.io/IbnTaimeaGabasat/cover.jpg">
+-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f5c53'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='%23c99b3f' font-family='serif'%3E%D9%82%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;500;600&family=Lateef:wght@400;700&family=Markazi+Text:wght@400;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- مكتبة jsPDF لم تعد تُحمَّل مع الصفحة (نحو ٣٦٠ كيلوبايت)؛
+     صارت تُجلب عند أول ضغطةٍ على "تحميل الكتاب PDF" فقط، فتُفتح الصفحة أسرع للجميع -->
 <style>
   :root{
     --parchment:#f2e9d6; --parchment-2:#e9dcc0; --ink:#2b2318; --ink-soft:#5a4f3c;
@@ -217,6 +238,37 @@
   .bubble.bubble-all .b-count{color:#5a4118;}
   @keyframes floatBob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);}}
 
+  .backup-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .backup-btn{
+    font-family:inherit; font-size:12.5px; padding:7px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--line); background:var(--card-bg); color:var(--ink);
+    transition:background .18s ease, border-color .18s ease;
+  }
+  .backup-btn:hover{background:var(--parchment-2); border-color:var(--gold);}
+  .backup-hint{font-size:10.5px; color:var(--ink-soft); opacity:.85; margin-top:7px; line-height:1.7; max-width:260px;}
+
+  .resume-chip{
+    display:none; align-items:center; gap:8px; margin:10px auto 0; width:max-content; max-width:92%;
+    background:var(--card-bg); border:1px solid var(--line); border-radius:999px;
+    padding:7px 8px 7px 14px; box-shadow:var(--shadow); font-size:12.5px; color:var(--ink);
+  }
+  .resume-chip.show{display:flex;}
+  .resume-chip .rc-go{
+    cursor:pointer; background:var(--accent); color:#f5ecd8; border-radius:999px;
+    padding:5px 13px; font-size:12px; font-weight:600; border:0; font-family:inherit;
+  }
+  .resume-chip .rc-go:hover{filter:brightness(1.12);}
+  .resume-chip .rc-x{cursor:pointer; opacity:.55; padding:0 4px; font-size:13px;}
+  .resume-chip .rc-x:hover{opacity:1;}
+
+  /* احترام تفضيل المستخدم بتقليل الحركة (مهمّ لمن يتأذّى بالحركة الدائمة) */
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:.001ms !important; animation-iteration-count:1 !important;
+      transition-duration:.001ms !important; scroll-behavior:auto !important;
+    }
+  }
+
   .section-title{font-family:var(--quote-font); font-size:22px; color:var(--gold); text-align:center; margin:0 0 10px;}
   .section-title::before, .section-title::after{content:''; display:inline-block; width:36px; height:1px; background:var(--line); vertical-align:middle; margin:0 10px;}
 
@@ -323,6 +375,7 @@
     position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%;
     background:var(--card-bg); border:1px solid var(--line); color:var(--ink-soft); display:flex; align-items:center;
     justify-content:center; cursor:pointer; box-shadow:var(--shadow); z-index:5; font-size:18px; user-select:none;
+    font-family:inherit; padding:0; line-height:1;
   }
   .nav-arrow:hover{background:var(--accent); color:var(--card-bg); border-color:var(--accent);}
   .nav-arrow.prev{inset-inline-start:-6px;}
@@ -374,9 +427,18 @@
   }
 
   .card-actions{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; margin-top:10px;}
-  .icon-btn{width:36px; height:36px; min-width:36px; min-height:36px; border-radius:50%; border:1px solid var(--line); background:var(--parchment); color:var(--ink-soft); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px; transition:all .15s ease; -webkit-tap-highlight-color:transparent;}
+  .icon-btn{width:36px; height:36px; min-width:36px; min-height:36px; border-radius:50%; border:1px solid var(--line); background:var(--parchment); color:var(--ink-soft); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px; transition:all .15s ease; -webkit-tap-highlight-color:transparent; font-family:inherit; padding:0; line-height:1;}
   .icon-btn:hover{background:var(--accent); border-color:var(--accent); color:var(--card-bg);}
   .icon-btn.busy{opacity:.5; pointer-events:none;}
+
+  /* حلقة تركيز واضحة لمن يتنقّل بلوحة المفاتيح (تظهر عند التنقّل بالمفاتيح فقط) */
+  :focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:4px;}
+  .bubble:focus-visible{outline-offset:4px;}
+  .skip-link{
+    position:absolute; inset-inline-start:-9999px; top:8px; z-index:200;
+    background:var(--accent); color:#f5ecd8; padding:10px 18px; border-radius:8px; font-size:14px; text-decoration:none;
+  }
+  .skip-link:focus{inset-inline-start:12px;}
 
   .toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:var(--accent-dark); color:#fff; padding:10px 22px; border-radius:999px; font-size:13.5px; z-index:50; pointer-events:none; transition:all .25s ease; max-width:86vw; text-align:center;}
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
@@ -429,8 +491,9 @@
 </style>
 </head>
 <body data-theme="parchment">
-<div class="bg-pattern"></div>
-<div class="menu-btn" id="menuBtn"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+<a class="skip-link" href="#mainContent">تخطَّ إلى الفوائد</a>
+<div class="bg-pattern" aria-hidden="true"></div>
+<div class="menu-btn" id="menuBtn" role="button" tabindex="0" aria-label="فتح قائمة الأبواب" aria-haspopup="dialog"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
 
 <div class="wrap">
 
@@ -447,6 +510,11 @@
     <h1>قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ</h1>
     <div class="quote-counter" id="quoteCounter"></div>
     <div class="progressive-note">سيتم إدراج فوائد بقية أجزاء "مجموع الفتاوى" تدريجيًا بإذن الله</div>
+    <div class="resume-chip" id="resumeChip">
+      <span id="resumeLabel">لديك موضع قراءةٍ سابق</span>
+      <button type="button" class="rc-go" id="resumeGoBtn">تابع القراءة</button>
+      <span class="rc-x" id="resumeDismiss" title="إخفاء">✕</span>
+    </div>
     <p class="compiler-line">جمع كليب بن أحمد بن ضيف الله الزهراني</p>
     <p class="dua-line">غفر الله له ولوالديه ولزوجه وأصلح له في ذريته...</p>
     <p class="subtitle">مجموعة أقوال وفتاوى شيخ الإسلام أحمد بن تيمية الحرّاني (٦٦١ – ٧٢٨ هـ)، قابلة للتصدير كبطاقة صورة ومشاركتها، ومبوّبة في أبواب العلم المختلفة</p>
@@ -460,9 +528,9 @@
       <input type="text" id="searchInput" placeholder="🔍 ابحث في الفوائد… (مثال: الصبر، التوكل)" autocomplete="off">
       <div class="search-results" id="searchResults"></div>
     </div>
-    <div class="tool-btn" id="randomBtn"><span>🎲</span> فائدة عشوائية</div>
+    <div class="tool-btn" id="randomBtn" role="button" tabindex="0"><span>🎲</span> فائدة عشوائية</div>
     <div class="tool-btn" id="favBtn"><span>⭐</span> المفضلة</div>
-    <div class="tool-btn" id="customizeBtn"><span>🎨</span> تخصيص البطاقة</div>
+    <div class="tool-btn" id="customizeBtn" role="button" tabindex="0" aria-expanded="false" aria-controls="customPanel"><span>🎨</span> تخصيص البطاقة</div>
   </div>
 
   <div class="panel" id="customPanel">
@@ -512,6 +580,15 @@
           <div class="toggle-switch on" id="ornToggle"></div>
           <span>زخارف وأنماط الخلفية</span>
         </div>
+      </div>
+      <div class="panel-group">
+        <span class="panel-label">نسخة احتياطية لمفضلتك وملاحظاتك</span>
+        <div class="backup-row">
+          <button type="button" class="backup-btn" id="backupExportBtn">⭳ حفظ نسخة</button>
+          <button type="button" class="backup-btn" id="backupImportBtn">⭱ استعادة نسخة</button>
+          <input type="file" id="backupFileInput" accept="application/json,.json" hidden>
+        </div>
+        <div class="backup-hint">تُحفظ المفضلة والملاحظات في هذا المتصفح فقط، وتُمحى بمسح بيانات التصفح؛ فاحفظ نسخةً بين حين وآخر.</div>
       </div>
     </div>
   </div>
@@ -605,14 +682,17 @@
       <ul class="preface-list">
         <li><strong>⭐ / ☆ المفضلة:</strong> اضغط لحفظ الفائدة في قسم "المفضلة" الخاص بك على هذا الجهاز.</li>
         <li><strong>📝 الملاحظات الشخصية:</strong> اكتب ملاحظة خاصة بك على أي فائدة، تُحفظ على جهازك فقط وتظهر معاينتها أسفل البطاقة.</li>
-        <li><strong>🎨 المظهر:</strong> من قائمة التخصيص غيّر ألوان السمة، حجم الخط، ونوع الخط العربي.</li>
+        <li><strong>🎨 المظهر:</strong> من قائمة التخصيص غيّر ألوان السمة، وحجم البطاقة، والإطار، ونوع الخط العربي — وتُحفظ اختياراتك فتعود كما تركتها في كل زيارة.</li>
+        <li><strong>💾 نسخة احتياطية:</strong> من قائمة التخصيص احفظ مفضلتك وملاحظاتك في ملفٍ واحد، واستعدها متى شئت أو انقلها إلى جهازٍ آخر. وهذا مهم؛ لأن ما يُحفظ في المتصفح يُمحى بمسح بيانات التصفح.</li>
+        <li><strong>▶ تابع القراءة:</strong> يتذكّر التطبيق آخر فائدةٍ وقفتَ عندها، ويعرض لك عند فتحه زرًّا يعيدك إليها مباشرة.</li>
       </ul>
       <p class="preface-bism" style="font-size:16px; margin-top:20px;">📤 مشاركة فائدة</p>
       <ul class="preface-list">
         <li><strong>⭳ تحميل كصورة:</strong> يحوّل البطاقة الحالية إلى صورة أنيقة تُحفظ على جهازك.</li>
         <li><strong>✆ واتساب:</strong> يفتح مشاركة مباشرة للبطاقة كصورة عبر واتساب (أو تطبيق المشاركة في جهازك).</li>
         <li><strong>✈ تيليجرام و 𝕏 (تويتر):</strong> يفتحان نافذة مشاركة جاهزة بنص الفائدة ورابطها في تلك المنصة مباشرة.</li>
-        <li><strong>🔗 نسخ الرابط:</strong> ينسخ رابطًا خاصًا بهذه الفائدة تحديدًا، يفتح عند زيارته نفس الفائدة مباشرة لمن أرسلته له.</li>
+        <li><strong>📋 نسخ النص:</strong> ينسخ نص الفائدة مع مصدرها إلى الحافظة، لمن أراد النص مجرّدًا لا صورة.</li>
+        <li><strong>🔗 نسخ الرابط:</strong> ينسخ رابطًا خاصًا بهذه الفائدة تحديدًا، يفتح عند زيارته نفس الفائدة مباشرة لمن أرسلته له. والرابط ثابتٌ لا يتغيّر مدلولُه مهما أُضيف من فوائد جديدة.</li>
         <li><strong>🖨 طباعة:</strong> يفتح تصميم طباعة نظيف لهذه الفائدة لطباعتها ورقيًا.</li>
       </ul>
       <p class="preface-bism" style="font-size:16px; margin-top:20px;">📄 تنزيل الكتاب كاملًا</p>
@@ -657,6 +737,14 @@
           <div class="work-body">
             <div class="work-name">الاختصار والجمع والتكميل</div>
             <div class="work-desc">في التفسير</div>
+          </div>
+          <div class="work-go">↖</div>
+        </a>
+        <a class="work-card" href="https://kmasskmass-svg.github.io/alkahf-tadabor/" target="_blank" rel="noopener">
+          <div class="work-icon">🕋</div>
+          <div class="work-body">
+            <div class="work-name">تدبّرات سورة الكهف</div>
+            <div class="work-desc">وقفاتٌ تدبّريّة مع آيات السورة</div>
           </div>
           <div class="work-go">↖</div>
         </a>
@@ -761,8 +849,8 @@
     <input type="number" id="jumpInput" min="1" placeholder="رقم الصفحة">
     <div class="jump-btn" id="jumpBtn">اذهب ↦</div>
   </div>
-  <div class="carousel-wrap">
-    <div class="nav-arrow prev" id="prevArrow">‹</div>
+  <div class="carousel-wrap" id="mainContent" role="region" aria-label="بطاقات الفوائد" tabindex="-1">
+    <button type="button" class="nav-arrow prev" id="prevArrow" aria-label="الفائدة السابقة">‹</button>
     <div class="book-stage" id="bookStage">
       <div class="book" id="book">
         <div class="page-slot left" id="leftSlot"></div>
@@ -774,7 +862,7 @@
         </div>
       </div>
     </div>
-    <div class="nav-arrow next" id="nextArrow">›</div>
+    <button type="button" class="nav-arrow next" id="nextArrow" aria-label="الفائدة التالية">›</button>
   </div>
 
   <footer>
@@ -783,7 +871,7 @@
   </footer>
 
 </div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="printArea"></div>
 
 <script>
@@ -1104,6 +1192,8 @@ const data = [
     { text:"مَنْ تَابَ تَوْبَةً عَامَّةً كَانَتْ هَذِهِ التَّوْبَةُ مُقْتَضِيَةً لِغُفْرَانِ الذُّنُوبِ كُلِّهَا وَإِنْ لَمْ يَسْتَحْضِرْ أَعْيَانَ الذُّنُوبِ، إلَّا أَنْ يُعَارِضَ هَذَا الْعَامَّ مُعَارِضٌ يُوجِبُ التَّخْصِيصَ، مِثْلُ أَنْ يَكُونَ بَعْضُ الذُّنُوبِ لَوْ اسْتَحْضَرَهُ لَمْ يَتُبْ مِنْهُ؛ لِقُوَّةِ إرَادَتِهِ إيَّاهُ أَوْ لِاعْتِقَادِهِ أَنَّهُ حَسَنٌ لَيْسَ بِقَبِيحٍ، فَمَا كَانَ لَوْ اسْتَحْضَرَهُ لَمْ يَتُبْ مِنْهُ لَمْ يَدْخُلْ فِي التَّوْبَةِ، وَأَمَّا مَا كَانَ لَوْ حَضَرَ بِعَيْنِهِ لَكَانَ مِمَّا يَتُوبُ مِنْهُ فَإِنَّ التَّوْبَةَ الْعَامَّةَ شَامِلَتُهُ", source:"مجموع الفتاوى، ج١٠ ص٣٢٨", place:"في بيان أن التوبة العامة تشمل غفران جميع الذنوب ما لم يكن ثمّ ذنب لو استحضره العبد لم يتب منه لقوة إرادته له أو اعتقاده حُسنه" },
     { text:"التَّوْبَةُ الْمُطْلَقَةُ: وَهِيَ أَنْ يَتُوبَ تَوْبَةً مُجْمَلَةً وَلَا تَسْتَلْزِمُ التَّوْبَةَ مِنْ كُلِّ ذَنْبٍ، فَهَذِهِ لَا تُوجِبُ دُخُولَ كُلِّ فَرْدٍ مِنْ أَفْرَادِ الذُّنُوبِ فِيهَا وَلَا تَمْنَعُ دُخُولَهُ كَاللَّفْظِ الْمُطْلَقِ؛ لَكِنَّ هَذِهِ تَصْلُحُ أَنْ تَكُونَ سَبَبًا لِغُفْرَانِ الْمُعَيَّنِ، كَمَا تَصْلُحُ أَنْ تَكُونَ سَبَبًا لِغُفْرَانِ الْجَمِيعِ؛ بِخِلَافِ الْعَامَّةِ فَإِنَّهَا مُقْتَضِيَةٌ لِلْغُفْرَانِ الْعَامِّ كَمَا تَنَاوَلَتْ الذُّنُوبَ تَنَاوُلًا عَامًّا", source:"مجموع الفتاوى، ج١٠ ص٣٢٨", place:"في الفرق بين التوبة المطلقة المجملة والتوبة العامة، وأن الأولى تصلح سببًا لغفران المعيّن أو الجميع دون اقتضاء عام كالثانية" },
     { text:"الْوَعِيدُ الْمُطْلَقُ فِي الْكِتَابِ وَالسُّنَّةِ مَشْرُوطٌ بِثُبُوتِ شُرُوطٍ وَانْتِفَاءِ مَوَانِعَ، فَلَا يَلْحَقُ التَّائِبَ مِنْ الذَّنْبِ بِاتِّفَاقِ الْمُسْلِمِينَ، وَلَا يَلْحَقُ مَنْ لَهُ حَسَنَاتٌ تَمْحُو سَيِّئَاتِهِ، وَلَا يَلْحَقُ الْمَشْفُوعَ لَهُ وَالْمَغْفُورَ لَهُ؛ فَإِنَّ الذُّنُوبَ تَزُولُ عُقُوبَتُهَا الَّتِي هِيَ جَهَنَّمُ بِأَسْبَابِ التَّوْبَةِ وَالْحَسَنَاتِ الْمَاحِيَةِ وَالْمَصَائِبِ الْمُكَفِّرَةِ - لَكِنَّهَا مِنْ عُقُوبَاتِ الدُّنْيَا - وَكَذَلِكَ مَا يَحْصُلُ فِي الْبَرْزَخِ مِنْ الشِّدَّةِ، وَكَذَلِكَ مَا يَحْصُلُ فِي عَرَصَاتِ الْقِيَامَةِ، وَتَزُولُ أَيْضًا بِدُعَاءِ الْمُؤْمِنِينَ: كَالصَّلَاةِ عَلَيْهِ وَشَفَاعَةِ الشَّفِيعِ الْمُطَاعِ، كَمَنْ يَشْفَعُ فِيهِ سَيِّدُ الشُّفَعَاءِ مُحَمَّدٌ صلى الله عليه وسلم", source:"مجموع الفتاوى، ج١٠ ص٣٣٠", place:"في بيان أن الوعيد المطلق في الكتاب والسنة مشروط بثبوت شروط وانتفاء موانع، وذكر أسباب زوال عقوبة الذنوب من التوبة والحسنات والمصائب والشفاعة" },
+    { text:"مِنْ تَمَامِ نِعْمَةِ اللَّهِ عَلَى عِبَادِهِ الْمُؤْمِنِينَ أَنْ يُنْزِلَ بِهِمْ الشِّدَّةَ وَالضُّرَّ وَمَا يُلْجِئُهُمْ إلَى تَوْحِيدِهِ فَيَدْعُونَهُ مُخْلِصِينَ لَهُ الدِّينَ وَيَرْجُونَهُ لَا يَرْجُونَ أَحَدًا سِوَاهُ وَتَتَعَلَّقُ قُلُوبُهُمْ بِهِ لَا بِغَيْرِهِ فَيَحْصُلُ لَهُمْ مِنْ التَّوَكُّلِ عَلَيْهِ وَالْإِنَابَةِ إلَيْهِ وَحَلَاوَةِ الْإِيمَانِ وَذَوْقِ طَعْمِهِ وَالْبَرَاءَةِ مِنْ الشِّرْكِ مَا هُوَ أَعْظَمُ نِعْمَةً عَلَيْهِمْ مِنْ زَوَالِ الْمَرَضِ وَالْخَوْفِ أَوْ الْجَدْبِ أَوْ حُصُولِ الْيُسْرِ وَزَوَالِ الْعُسْرِ فِي الْمَعِيشَةِ فَإِنَّ ذَلِكَ لَذَّاتٌ بَدَنِيَّةٌ وَنِعَمٌ دُنْيَوِيَّةٌ قَدْ يَحْصُلُ لِلْكَافِرِ مِنْهَا أَعْظَمُ مِمَّا يَحْصُلُ لِلْمُؤْمِنِ. وَأَمَّا مَا يَحْصُلُ لِأَهْلِ التَّوْحِيدِ الْمُخْلِصِينَ لِلَّهِ الدِّينَ فَأَعْظَمُ مِنْ أَنْ يُعَبِّرَ عَنْ كُنْهِهِ مَقَالٌ أَوْ يَسْتَحْضِرَ تَفْصِيلَهُ بَالٌ وَلِكُلِّ مُؤْمِنٍ مِنْ ذَلِكَ نَصِيبٌ بِقَدْرِ إيمَانِهِ وَلِهَذَا قَالَ بَعْضُ السَّلَفِ: يَا ابْنَ آدَمَ لَقَدْ بُورِكَ لَك فِي حَاجَةٍ أَكْثَرْت فِيهَا مِنْ قَرْعِ بَابِ سَيِّدِك", source:"مجموع الفتاوى، ج١٠ ص٣٣٣", place:"في بيان أن إنزال الشدة والضر بالمؤمنين من تمام نعمة الله عليهم؛ لما يورثه ذلك من إخلاص الدعاء والتوكل وتعلّق القلب بالله وذوق حلاوة الإيمان، وأن ذلك أعظم من زوال المرض والخوف والجدب وحصول اليسر" },
+    { text:"قَدْ تُسْقِطُ الشَّرِيعَةُ التَّكْلِيفَ عَمَّنْ لَمْ تَكْمُلْ فِيهِ أَدَاةُ الْعِلْمِ وَالْقُدْرَةِ تَخْفِيفًا عَنْهُ وَضَبْطًا لِمَنَاطِ التَّكْلِيفِ وَإِنْ كَانَ تَكْلِيفُهُ مُمْكِنًا كَمَا رُفِعَ الْقَلَمُ عَنْ الصَّبِيِّ حَتَّى يَحْتَلِمَ وَإِنْ كَانَ لَهُ فَهْمٌ وَتَمْيِيزٌ؛ لَكِنَّ ذَاكَ لِأَنَّهُ لَمْ يَتِمَّ فَهْمُهُ؛ وَلِأَنَّ الْعَقْلَ يَظْهَرُ فِي النَّاسِ شَيْئًا فَشَيْئًا؛ وَهُمْ يَخْتَلِفُونَ فِيهِ، فَلَمَّا كَانَتْ الْحِكْمَةُ خَفِيَّةً وَمُنْتَشِرَةً قُيِّدَتْ بِالْبُلُوغِ. وَكَمَا لَا يَجِبُ الْحَجُّ إلَّا عَلَى مَنْ مَلَكَ زَادًا وَرَاحِلَةً عِنْدَ جُمْهُورِ الْعُلَمَاءِ؛ مَعَ إمْكَانِ الْمَشْيِ لِمَا فِيهِ مِنْ الْمَشَقَّةِ وَكَمَا لَا يَجِبُ الصَّوْمُ عَلَى الْمُسَافِرِ مَعَ إمْكَانِهِ مِنْهُ تَخْفِيفًا عَلَيْهِ وَكَمَا تَسْقُطُ الْوَاجِبَاتُ بِالْمَرَضِ الَّذِي يُخَافُ مَعَهُ زِيَادَةُ الْمَرَضِ وَتَأَخُّرُ الْبُرْءِ وَإِنْ كَانَ فِعْلُهَا مُمْكِنًا", source:"مجموع الفتاوى، ج١٠ ص٣٤٥", place:"في بيان أن الشريعة قد تسقط التكليف عمن لم تكمل فيه أداة العلم والقدرة تخفيفًا عنه وضبطًا لمناط التكليف وإن كان ممكنًا، بأمثلة رفع القلم عن الصبي وسقوط الحج عن العاجز والصوم عن المسافر والواجبات بالمرض" },
     { text:"لَا يَجُوزُ أَنْ يُقَالَ إنَّ هَذَا مُسْتَحَبٌّ أَوْ مَشْرُوعٌ إلَّا بِدَلِيلِ شَرْعِيٍّ وَلَا يَجُوزُ أَنْ يُثْبِتَ شَرِيعَةً بِحَدِيثِ ضَعِيفٍ لَكِنْ إذَا ثَبَتَ أَنَّ الْعَمَلَ مُسْتَحَبٌّ بِدَلِيلِ شَرْعِيٍّ وَرُوِيَ لَهُ فَضَائِلُ بِأَسَانِيدَ ضَعِيفَةٍ جَازَ أَنْ تُرْوَى إذَا لَمْ يُعْلَمْ أَنَّهَا كَذِبٌ وَذَلِكَ أَنَّ مَقَادِيرَ الثَّوَابِ غَيْرُ مَعْلُومَةٍ فَإِذَا رُوِيَ فِي مِقْدَارِ الثَّوَابِ حَدِيثٌ لَا يُعْرَفُ أَنَّهُ كَذِبٌ لَمْ يَجُزْ أَنْ يُكَذَّبَ بِهِ وَهَذَا هُوَ الَّذِي كَانَ الْإِمَامُ أَحْمَد بْنُ حَنْبَلٍ وَغَيْرُهُ يُرَخِّصُونَ فِيهِ وَفِي رِوَايَاتِ أَحَادِيثِ الْفَضَائِلِ", source:"مجموع الفتاوى، ج١٠ ص٤٠٨", place:"في بيان أنه لا يجوز إثبات الاستحباب أو المشروعية إلا بدليل شرعي، وحكم رواية فضائل الأعمال بأسانيد ضعيفة إذا ثبت استحباب العمل بدليل صحيح" },
     { text:"وَمَا فَعَلَهُ النَّبِيُّ صلى الله عليه وسلم عَلَى وَجْهِ التَّعَبُّدِ فَهُوَ عِبَادَةٌ يُشْرَعُ التَّأَسِّي بِهِ فِيهِ. فَإِذَا خَصَّصَ زَمَانًا أَوْ مَكَانًا بِعِبَادَةِ كَانَ تَخْصِيصُهُ بِتِلْكَ الْعِبَادَةِ سُنَّةً: كَتَخْصِيصِهِ الْعَشْرَ الْأَوَاخِرَ بِالِاعْتِكَافِ فِيهَا وَكَتَخْصِيصِهِ مَقَامَ إبْرَاهِيمَ بِالصَّلَاةِ فِيهِ فَالتَّأَسِّي بِهِ أَنْ يَفْعَلَ مِثْلَ مَا فَعَلَ عَلَى الْوَجْهِ الَّذِي فَعَلَ؛ لِأَنَّهُ فَعَلَ. وَذَلِكَ إنَّمَا يَكُونُ بِأَنْ يُقْصَدَ مِثْلَمَا قَصَدَ فَإِذَا سَافَرَ لِحَجِّ أَوْ عُمْرَةٍ أَوْ جِهَادٍ وَسَافَرْنَا كَذَلِكَ كُنَّا مُتَّبِعِينَ لَهُ، وَكَذَلِكَ إذَا ضَرَبَ لِإِقَامَةِ حَدٍّ", source:"مجموع الفتاوى، ج١٠ ص٤٠٩", place:"في بيان أن ما فعله النبي صلى الله عليه وسلم على وجه التعبد عبادة يُشرع التأسي به، وأن تخصيصه زمانًا أو مكانًا بعبادة سنة، كتخصيص العشر الأواخر بالاعتكاف ومقام إبراهيم بالصلاة" },
     { text:"يُذْكَرُ عَنْ عُثْمَانَ بْنِ عفان رضي الله عنه أَنَّهُ قَالَ: اتَّقُوا الْخَمْرَ فَإِنَّهَا أُمُّ الْخَبَائِثِ؛ وَإِنَّ رَجُلًا سَأَلَ امْرَأَةً فَقَالَتْ: لَا أَفْعَلُ حَتَّى تَسْجُدَ لِهَذَا الْوَثَنِ فَقَالَ لَا أُشْرِكُ بِاَللَّهِ فَقَالَتْ: أَوْ تَقْتُلَ هَذَا الصَّبِيَّ؟ فَقَالَ: لَا أَقْتُلُ النَّفْسَ الَّتِي حَرَّمَ اللَّهُ فَقَالَتْ: أَوْ تَشْرَبَ هَذَا الْقَدَحَ؟ فَقَالَ هَذَا أَهْوَنُ فَلَمَّا شَرِبَ الْخَمْرَ قَتَلَ الصَّبِيَّ وَسَجَدَ لِلْوَثَنِ وَزَنَى بِالْمَرْأَةِ", source:"مجموع الفتاوى، ج١٠ ص٤١٧", place:"في بيان أن الخمر أم الخبائث، وفيه ما يُذكر عن عثمان بن عفان رضي الله عنه من قصة الرجل الذي جرّه شرب الخمر إلى الشرك والقتل والزنا" },
@@ -1214,6 +1304,54 @@ const data = [
 let currentFrame = 'classic';
 let currentSize = 'lg';
 
+/* ---------- معرّف ثابت لكل فائدة (لا يتأثر بترتيبها) ----------
+ * كانت المفضلة والملاحظات والروابط تُبنى على رقم ترتيب الفائدة داخل الجزء (v10::168)،
+ * فكان إدراجُ أي فائدة جديدة في وسط جزءٍ يُزيح كل ما بعدها، فتنتقل نجمة المستخدم
+ * وملاحظته إلى فائدةٍ أخرى، ويفتح الرابطُ المشارَك نصًّا مختلفًا.
+ * الآن يُشتقُّ المعرّف من نصّ الفائدة نفسه بعد تجريده من التشكيل، فيبقى ثابتًا
+ * مهما تغيّر ترتيبها، ولا يتأثر بإضافة التشكيل أو تعديله لاحقًا.
+ */
+function hashStr(s){
+  let h1 = 0x811c9dc5, h2 = 0x1000193;
+  for(let i=0; i<s.length; i++){
+    const c = s.charCodeAt(i);
+    h1 = ((h1 ^ c) * 0x01000193) >>> 0;
+    h2 = ((h2 + c) * 0x01000193 + i) >>> 0;
+  }
+  return (h1.toString(36) + h2.toString(36)).replace(/[^a-z0-9]/g,'').slice(0,12);
+}
+function quoteUid(catKey, q){
+  if(!q) return catKey + '-x';
+  if(!q._uid){
+    try{
+      Object.defineProperty(q, '_uid', {
+        value: catKey + '-' + hashStr(normalizeArabic(q.text)),
+        enumerable:false, writable:false, configurable:false
+      });
+    }catch(e){ return catKey + '-' + hashStr(normalizeArabic(q.text)); }
+  }
+  return q._uid;
+}
+/* خريطة الإزاحة: تصحيح الأرقام القديمة المحفوظة قبل إدراج فوائد في وسط جزء.
+ * كل مدخلة: [مفتاح الجزء، الموضع الذي أُدرج عنده، عدد الفوائد المُدرَجة]
+ * (أُدرجت فائدتا ج١٠ ص٣٣٣ و ص٣٤٥ عند الموضع ١٥٩) */
+const LEGACY_INSERTIONS = [ { key:'v10', at:159, n:2 } ];
+function legacyIndexToCurrent(catKey, oldIdx){
+  let idx = oldIdx;
+  LEGACY_INSERTIONS.forEach(ins=>{
+    if(ins.key === catKey && oldIdx >= ins.at) idx += ins.n;
+  });
+  return idx;
+}
+function uidFromLegacyId(legacyId){
+  const m = String(legacyId).match(/^([a-zA-Z0-9]+)::(-?\d+)$/);
+  if(!m) return null;
+  const cat = data.find(c=>c.key===m[1]);
+  if(!cat) return null;
+  const q = cat.quotes[legacyIndexToCurrent(m[1], parseInt(m[2],10))];
+  return q ? quoteUid(cat.key, q) : null;
+}
+
 /* ---------- favorites (localStorage) ---------- */
 const FAV_KEY = 'qabasat_favorites_v1';
 function loadFavorites(){
@@ -1221,12 +1359,10 @@ function loadFavorites(){
   catch(e){ return []; }
 }
 function saveFavorites(list){
-  try{ localStorage.setItem(FAV_KEY, JSON.stringify(list)); }catch(e){}
+  try{ localStorage.setItem(FAV_KEY, JSON.stringify(list)); return true; }catch(e){ return false; }
 }
 function favId(catKey, q){
-  const cat = data.find(c=>c.key===catKey);
-  const idx = cat ? cat.quotes.indexOf(q) : -1;
-  return `${catKey}::${idx}`;
+  return quoteUid(catKey, q);
 }
 function isFavorite(catKey, q){
   return loadFavorites().includes(favId(catKey, q));
@@ -1247,8 +1383,51 @@ function loadNotes(){
   catch(e){ return {}; }
 }
 function saveNotes(obj){
-  try{ localStorage.setItem(NOTES_KEY, JSON.stringify(obj)); }catch(e){}
+  try{ localStorage.setItem(NOTES_KEY, JSON.stringify(obj)); return true; }catch(e){ return false; }
 }
+
+/* ---------- ترحيل البيانات القديمة إلى المعرّفات الثابتة (يُنفَّذ مرة واحدة) ---------- */
+const ID_MIGRATION_KEY = 'qabasat_id_migration_v2';
+function migrateLegacyStorage(){
+  try{
+    if(localStorage.getItem(ID_MIGRATION_KEY)) return;
+  }catch(e){ return; }
+
+  try{
+    const favs = loadFavorites();
+    if(favs.length){
+      const migrated = [];
+      favs.forEach(id=>{
+        if(/::-?\d+$/.test(id)){
+          const uid = uidFromLegacyId(id);
+          if(uid && migrated.indexOf(uid) < 0) migrated.push(uid);
+        } else if(migrated.indexOf(id) < 0){
+          migrated.push(id);
+        }
+      });
+      saveFavorites(migrated);
+    }
+
+    const notes = loadNotes();
+    const keys = Object.keys(notes);
+    if(keys.length){
+      const out = {};
+      keys.forEach(k=>{
+        if(/::-?\d+$/.test(k)){
+          const uid = uidFromLegacyId(k);
+          if(uid) out[uid] = notes[k];
+          else out['__orphan_' + k] = notes[k]; // لا تُفقد ملاحظة المستخدم أبدًا
+        } else {
+          out[k] = notes[k];
+        }
+      });
+      saveNotes(out);
+    }
+  }catch(e){ /* الترحيل مساعدٌ لا حاسم؛ لا يُوقف التطبيق عند الخطأ */ }
+
+  try{ localStorage.setItem(ID_MIGRATION_KEY, '1'); }catch(e){}
+}
+migrateLegacyStorage();
 function getNote(catKey, q){
   const notes = loadNotes();
   return notes[favId(catKey, q)] || '';
@@ -1258,7 +1437,7 @@ function setNote(catKey, q, text){
   const id = favId(catKey, q);
   const trimmed = (text || '').trim();
   if(trimmed){ notes[id] = trimmed; } else { delete notes[id]; }
-  saveNotes(notes);
+  return saveNotes(notes);
 }
 function escapeHtml(s){
   return (s || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -1421,14 +1600,15 @@ function cardHTML(cat, q){
     </div>
     ${hasNote ? `<div class="my-note-preview">📝 ${escapeHtml(noteText).replace(/\n/g,'<br>')}</div>` : ''}
     <div class="card-actions">
-      <div class="icon-btn fav-btn${favActive}" data-act="fav" title="إضافة إلى المفضلة">${favActive ? '★' : '☆'}</div>
-      <div class="icon-btn${hasNote ? ' has-note' : ''}" data-act="note" title="${hasNote ? 'عرض/تعديل ملاحظتك' : 'أضف ملاحظة شخصية'}">📝</div>
-      <div class="icon-btn" data-act="print" title="طباعة هذه الفائدة">🖨</div>
-      <div class="icon-btn" data-act="download" title="تحميل كصورة">⭳</div>
-      <div class="icon-btn" data-act="whatsapp" title="مشاركة البطاقة عبر واتساب">✆</div>
-      <div class="icon-btn" data-act="telegram" title="مشاركة عبر تيليجرام">✈</div>
-      <div class="icon-btn" data-act="twitter" title="مشاركة عبر X (تويتر)">𝕏</div>
-      <div class="icon-btn" data-act="link" title="نسخ رابط الفائدة">🔗</div>
+      <button type="button" class="icon-btn fav-btn${favActive}" data-act="fav" aria-pressed="${favActive ? 'true' : 'false'}" title="${favActive ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة'}" aria-label="${favActive ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة'}">${favActive ? '★' : '☆'}</button>
+      <button type="button" class="icon-btn${hasNote ? ' has-note' : ''}" data-act="note" title="${hasNote ? 'عرض/تعديل ملاحظتك' : 'أضف ملاحظة شخصية'}" aria-label="${hasNote ? 'عرض أو تعديل ملاحظتك' : 'أضف ملاحظة شخصية'}">📝</button>
+      <button type="button" class="icon-btn" data-act="copy" title="نسخ نص الفائدة" aria-label="نسخ نص الفائدة مع مصدره">📋</button>
+      <button type="button" class="icon-btn" data-act="print" title="طباعة هذه الفائدة" aria-label="طباعة هذه الفائدة">🖨</button>
+      <button type="button" class="icon-btn" data-act="download" title="تحميل كصورة" aria-label="تحميل الفائدة كصورة">⭳</button>
+      <button type="button" class="icon-btn" data-act="whatsapp" title="مشاركة البطاقة عبر واتساب" aria-label="مشاركة عبر واتساب">✆</button>
+      <button type="button" class="icon-btn" data-act="telegram" title="مشاركة عبر تيليجرام" aria-label="مشاركة عبر تيليجرام">✈</button>
+      <button type="button" class="icon-btn" data-act="twitter" title="مشاركة عبر X (تويتر)" aria-label="مشاركة عبر إكس تويتر">𝕏</button>
+      <button type="button" class="icon-btn" data-act="link" title="نسخ رابط الفائدة" aria-label="نسخ رابط هذه الفائدة">🔗</button>
     </div>
   `;
 }
@@ -1554,26 +1734,76 @@ function updateHeader(i){
 function updatePermalink(item){
   const isSpecial = !item || item.isRef || item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
   if(isSpecial || !item.q || !item.cat) return;
-  const idx = item.cat.quotes.indexOf(item.q);
-  if(idx < 0) return;
-  const newHash = '#q=' + item.cat.key + '-' + idx;
+  const newHash = '#f=' + quoteUid(item.cat.key, item.q);
   if(location.hash !== newHash){
     try{ history.replaceState(null, '', newHash); }catch(e){}
   }
+  saveReadingPosition(item);
 }
 
-function quotePermalinkUrl(catKey, idx){
-  return location.origin + location.pathname + '#q=' + catKey + '-' + idx;
+/* ---------- متابعة القراءة: حفظ آخر موضع وصل إليه القارئ ---------- */
+const RESUME_KEY = 'qabasat_resume_v1';
+function saveReadingPosition(item){
+  try{
+    localStorage.setItem(RESUME_KEY, JSON.stringify({
+      uid: quoteUid(item.cat.key, item.q),
+      label: item.cat.label,
+      at: Date.now()
+    }));
+  }catch(e){}
+}
+function loadReadingPosition(){
+  try{ return JSON.parse(localStorage.getItem(RESUME_KEY) || 'null'); }
+  catch(e){ return null; }
+}
+function jumpToUid(uid){
+  const found = findQuoteByUid(uid);
+  if(!found) return false;
+  jumpToSpecificQuote(found.cat, found.q);
+  return true;
+}
+
+/* الرابط الدائم صار مبنيًّا على المعرّف الثابت (#f=v10-ab12cd34)،
+ * فلا يتغيّر مدلولُه أبدًا مهما أُضيف من فوائد أو أُعيد ترتيبها.
+ * والروابط القديمة (#q=v10-168) ما زالت تعمل مع تصحيح الإزاحة. */
+function quotePermalinkUrl(catKey, qOrIdx){
+  const cat = data.find(c=>c.key===catKey);
+  const q = (typeof qOrIdx === 'number') ? (cat ? cat.quotes[qOrIdx] : null) : qOrIdx;
+  if(!q) return location.origin + location.pathname;
+  return location.origin + location.pathname + '#f=' + quoteUid(catKey, q);
+}
+
+function findQuoteByUid(uid){
+  for(const cat of data){
+    for(const q of cat.quotes){
+      if(quoteUid(cat.key, q) === uid) return { cat, q };
+    }
+  }
+  return null;
 }
 
 function openFromHash(){
-  const m = location.hash.match(/^#q=([a-zA-Z0-9]+)-(\d+)$/);
-  if(!m) return false;
-  const cat = data.find(c=>c.key===m[1]);
-  const idx = parseInt(m[2], 10);
-  if(!cat || !cat.quotes[idx]) return false;
+  const h = location.hash;
+  let cat = null, q = null;
+
+  const mNew = h.match(/^#f=([a-zA-Z0-9]+-[a-z0-9]+)$/);
+  if(mNew){
+    const found = findQuoteByUid(mNew[1]);
+    if(found){ cat = found.cat; q = found.q; }
+  }
+
+  if(!q){
+    const mOld = h.match(/^#q=([a-zA-Z0-9]+)-(\d+)$/);
+    if(mOld){
+      const c = data.find(x=>x.key===mOld[1]);
+      const idx = legacyIndexToCurrent(mOld[1], parseInt(mOld[2], 10));
+      if(c && c.quotes[idx]){ cat = c; q = c.quotes[idx]; }
+    }
+  }
+
+  if(!cat || !q) return false;
   render(cat.key);
-  const pIdx = pages.findIndex(p => !p.isRef && p.q === cat.quotes[idx]);
+  const pIdx = pages.findIndex(p => !p.isRef && p.q === q);
   renderStatic(pIdx < 0 ? 0 : pIdx);
   return true;
 }
@@ -1808,6 +2038,9 @@ function buildBubbles(){
     const sizeClass = it.count === null ? '' : (it.count > 20 ? 'bubble-lg' : it.count > 8 ? 'bubble-md' : '');
     b.className = 'bubble ' + sizeClass + (it.isAll ? ' bubble-all' : '') + (it.isPdf ? ' bubble-pdf' : '') + (it.isPreface ? ' bubble-preface' : '') + (it.isFav ? ' bubble-preface' : '') + (it.isTopics ? ' bubble-preface' : '') + (it.isDaily ? ' bubble-preface' : '') + (it.isGuide ? ' bubble-preface' : '') + (it.isFruits ? ' bubble-fruits' : '');
     b.dataset.key = it.key;
+    b.setAttribute('role', 'button');
+    b.setAttribute('tabindex', '0');
+    b.setAttribute('aria-label', it.label + (it.count === null ? '' : ` — ${it.count} فائدة`));
     const dur = (3.4 + Math.random()*2.2).toFixed(2);
     const delay = (-(Math.random()*3)).toFixed(2);
     b.style.animationDuration = dur + 's';
@@ -1838,6 +2071,13 @@ document.getElementById('menuBtn').addEventListener('click', toggleBubbleMenu);
 document.getElementById('bubbleClose').addEventListener('click', closeBubbleMenu);
 document.getElementById('bubbleOverlay').addEventListener('click', (e)=>{
   if(e.target.id === 'bubbleOverlay') closeBubbleMenu();
+});
+document.getElementById('bubbleField').addEventListener('keydown', (e)=>{
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const b = e.target.closest('.bubble');
+  if(!b) return;
+  e.preventDefault();
+  b.click();
 });
 document.getElementById('bubbleField').addEventListener('click', (e)=>{
   const b = e.target.closest('.bubble');
@@ -2134,7 +2374,11 @@ document.getElementById('noteOverlay').addEventListener('click', (e)=>{
 document.getElementById('noteSaveBtn').addEventListener('click', ()=>{
   if(!noteContext) return;
   const val = document.getElementById('noteTextarea').value;
-  setNote(noteContext.catKey, noteContext.q, val);
+  const ok = setNote(noteContext.catKey, noteContext.q, val);
+  if(!ok){
+    showToast('تعذّر حفظ الملاحظة: مساحة التخزين ممتلئة أو محجوبة في هذا المتصفح', 4200);
+    return;
+  }
   showToast(val.trim() ? 'تم حفظ الملاحظة' : 'تم مسح الملاحظة');
   closeNoteEditor();
   renderStatic(curI);
@@ -2611,9 +2855,43 @@ function pdfFooter(ctx, c, pageNum){
 
 let pdfGenerating = false;
 
+/* تُجلب المكتبة عند الحاجة فقط، ومن مصدرين احتياطيين تحسّبًا لحجب أحدهما */
+let jspdfLoader = null;
+function ensureJsPdf(){
+  if(window.jspdf && window.jspdf.jsPDF) return Promise.resolve(true);
+  if(jspdfLoader) return jspdfLoader;
+  const sources = [
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
+    'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js'
+  ];
+  jspdfLoader = new Promise((resolve)=>{
+    let i = 0;
+    const tryNext = ()=>{
+      if(window.jspdf && window.jspdf.jsPDF) return resolve(true);
+      if(i >= sources.length){ jspdfLoader = null; return resolve(false); }
+      const s = document.createElement('script');
+      s.src = sources[i++];
+      s.async = true;
+      s.onload = ()=> resolve(!!(window.jspdf && window.jspdf.jsPDF));
+      s.onerror = ()=>{ s.remove(); tryNext(); };
+      document.head.appendChild(s);
+    };
+    tryNext();
+  });
+  return jspdfLoader;
+}
+
 async function generateFullPdfBook(selectedKeys){
   if(pdfGenerating) return;
-  if(!window.jspdf || !window.jspdf.jsPDF){ showToast('تعذّر تحميل أداة إنشاء PDF، تحقق من الاتصال'); return; }
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    showToast('جارٍ تجهيز أداة إنشاء PDF...', 20000);
+    const ready = await ensureJsPdf();
+    if(!ready){
+      showToast('تعذّر تحميل أداة إنشاء PDF. تأكد من الاتصال بالإنترنت، وقد تكون الشبكة تحجب مصادرها. يمكنك بدلًا من ذلك طباعة الفوائد فرادى بزر الطباعة 🖨', 6000);
+      return;
+    }
+  }
   const cats = data.filter(cat => selectedKeys.includes(cat.key));
   if(!cats.length){ showToast('لم يتم اختيار أي باب'); return; }
 
@@ -2689,6 +2967,29 @@ async function generateFullPdfBook(selectedKeys){
 let lastActionTs = 0;
 let lastActionBtn = null;
 
+async function copyTextToClipboard(text){
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  }catch(e){ /* نكمل بالطريقة البديلة */ }
+  try{
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, ta.value.length);
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){ return false; }
+}
+
 async function handleCardAction(btn){
   const now = Date.now();
   if(btn === lastActionBtn && (now - lastActionTs) < 700) return; // debounce double-fire (touchend + click)
@@ -2705,12 +3006,21 @@ async function handleCardAction(btn){
     const nowActive = toggleFavorite(pageEl._catKey, q);
     btn.classList.toggle('active', nowActive);
     btn.textContent = nowActive ? '★' : '☆';
+    btn.setAttribute('aria-pressed', nowActive ? 'true' : 'false');
+    btn.setAttribute('aria-label', nowActive ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة');
+    btn.setAttribute('title', nowActive ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة');
     showToast(nowActive ? 'أُضيفت الفائدة إلى المفضلة' : 'أُزيلت الفائدة من المفضلة', 1800);
     return;
   }
 
   if(act === 'note'){
     openNoteEditor(pageEl._catKey, q);
+    return;
+  }
+
+  if(act === 'copy'){
+    const ok = await copyTextToClipboard(caption);
+    showToast(ok ? 'نُسخ نص الفائدة مع مصدره' : 'تعذّر النسخ في هذا المتصفح');
     return;
   }
 
@@ -2722,9 +3032,7 @@ async function handleCardAction(btn){
   }
 
   if(act === 'telegram' || act === 'twitter'){
-    const cat = data.find(c=>c.key === pageEl._catKey);
-    const idx = cat ? cat.quotes.indexOf(q) : -1;
-    const permalink = idx >= 0 ? quotePermalinkUrl(pageEl._catKey, idx) : '';
+    const permalink = quotePermalinkUrl(pageEl._catKey, q);
     const shareText = caption + (permalink ? ('\n\n' + permalink) : '');
     if(act === 'telegram'){
       window.open('https://t.me/share/url?url=' + encodeURIComponent(permalink) + '&text=' + encodeURIComponent(caption), '_blank', 'noopener');
@@ -2735,10 +3043,7 @@ async function handleCardAction(btn){
   }
 
   if(act === 'link'){
-    const cat = data.find(c=>c.key === pageEl._catKey);
-    const idx = cat ? cat.quotes.indexOf(q) : -1;
-    if(idx < 0){ showToast('تعذّر إنشاء الرابط لهذه الفائدة'); return; }
-    const url = quotePermalinkUrl(pageEl._catKey, idx);
+    const url = quotePermalinkUrl(pageEl._catKey, q);
     try{
       if(navigator.clipboard && navigator.clipboard.writeText){
         await navigator.clipboard.writeText(url);
@@ -2820,12 +3125,71 @@ customizeBtn.addEventListener('click', ()=>{
   setTimeout(setCarouselHeight, 50);
 });
 
+/* ---------- حفظ تفضيلات المظهر واستعادتها في الزيارات القادمة ---------- */
+const PREFS_KEY = 'qabasat_prefs_v1';
+const SCALE_MAP = { sm:0.82, md:1, lg:1.22 };
+function loadPrefs(){
+  try{ return JSON.parse(localStorage.getItem(PREFS_KEY) || '{}') || {}; }
+  catch(e){ return {}; }
+}
+function savePrefs(patch){
+  try{
+    const cur = loadPrefs();
+    localStorage.setItem(PREFS_KEY, JSON.stringify(Object.assign(cur, patch)));
+  }catch(e){}
+}
+function applyFontPref(name){
+  document.documentElement.style.setProperty('--quote-font', `"${name}", 'Traditional Arabic', Tahoma, Arial, serif`);
+}
+function applySavedPrefs(){
+  const p = loadPrefs();
+
+  if(p.theme){
+    const sw = document.querySelector(`.swatch[data-theme="${p.theme}"]`);
+    if(sw){
+      document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+      sw.classList.add('active');
+      document.body.dataset.theme = p.theme;
+    }
+  }
+  if(p.frame){
+    const chip = document.querySelector(`#frameChips .chip[data-frame="${p.frame}"]`);
+    if(chip){
+      document.querySelectorAll('#frameChips .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      currentFrame = p.frame;
+    }
+  }
+  if(p.size && SCALE_MAP[p.size]){
+    const chip = document.querySelector(`#sizeChips .chip[data-size="${p.size}"]`);
+    if(chip){
+      document.querySelectorAll('#sizeChips .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      currentSize = p.size;
+      document.documentElement.style.setProperty('--scale', SCALE_MAP[p.size]);
+    }
+  }
+  if(p.font){
+    const sel = document.getElementById('fontSelect');
+    if(sel && Array.from(sel.options).some(o=>o.value === p.font)){
+      sel.value = p.font;
+      applyFontPref(p.font);
+    }
+  }
+  if(typeof p.ornaments === 'boolean'){
+    const t = document.getElementById('ornToggle');
+    t.classList.toggle('on', p.ornaments);
+    document.body.classList.toggle('no-ornaments', !p.ornaments);
+  }
+}
+
 document.getElementById('themeSwatches').addEventListener('click', (e)=>{
   const sw = e.target.closest('.swatch');
   if(!sw) return;
   document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
   sw.classList.add('active');
   document.body.dataset.theme = sw.dataset.theme;
+  savePrefs({ theme: sw.dataset.theme });
 });
 
 document.getElementById('frameChips').addEventListener('click', (e)=>{
@@ -2835,6 +3199,7 @@ document.getElementById('frameChips').addEventListener('click', (e)=>{
   chip.classList.add('active');
   currentFrame = chip.dataset.frame;
   document.querySelectorAll('.page-content').forEach(c=>c.dataset.frame = currentFrame);
+  savePrefs({ frame: currentFrame });
 });
 
 document.getElementById('sizeChips').addEventListener('click', (e)=>{
@@ -2843,18 +3208,103 @@ document.getElementById('sizeChips').addEventListener('click', (e)=>{
   document.querySelectorAll('#sizeChips .chip').forEach(c=>c.classList.remove('active'));
   chip.classList.add('active');
   currentSize = chip.dataset.size;
-  const scaleMap = { sm:0.82, md:1, lg:1.22 };
-  document.documentElement.style.setProperty('--scale', scaleMap[currentSize]);
+  document.documentElement.style.setProperty('--scale', SCALE_MAP[currentSize]);
+  savePrefs({ size: currentSize });
 });
 
 const ornToggle = document.getElementById('ornToggle');
 ornToggle.addEventListener('click', ()=>{
   ornToggle.classList.toggle('on');
-  document.body.classList.toggle('no-ornaments', !ornToggle.classList.contains('on'));
+  const on = ornToggle.classList.contains('on');
+  document.body.classList.toggle('no-ornaments', !on);
+  savePrefs({ ornaments: on });
 });
 
 document.getElementById('fontSelect').addEventListener('change', (e)=>{
-  document.documentElement.style.setProperty('--quote-font', `"${e.target.value}", 'Traditional Arabic', Tahoma, Arial, serif`);
+  applyFontPref(e.target.value);
+  savePrefs({ font: e.target.value });
+});
+
+/* ---------- نسخة احتياطية للمفضلة والملاحظات ---------- */
+document.getElementById('backupExportBtn').addEventListener('click', ()=>{
+  try{
+    const payload = {
+      app: 'qabasat-alyaqeen',
+      version: 2,
+      exportedAt: new Date().toISOString(),
+      favorites: loadFavorites(),
+      notes: loadNotes(),
+      prefs: loadPrefs()
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    const d = new Date();
+    const stamp = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    a.href = URL.createObjectURL(blob);
+    a.download = `قبسات-اليقين-نسخة-احتياطية-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    const n = payload.favorites.length, m = Object.keys(payload.notes).length;
+    showToast(`حُفظت النسخة: ${n} مفضلة و${m} ملاحظة`, 3200);
+  }catch(e){
+    showToast('تعذّر إنشاء النسخة الاحتياطية');
+  }
+});
+
+document.getElementById('backupImportBtn').addEventListener('click', ()=>{
+  document.getElementById('backupFileInput').click();
+});
+
+document.getElementById('backupFileInput').addEventListener('change', (e)=>{
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    let payload;
+    try{ payload = JSON.parse(reader.result); }
+    catch(err){ showToast('الملف غير صالح: تأكد أنه ملف نسخة احتياطية من هذا التطبيق', 4000); return; }
+    if(!payload || (payload.app && payload.app !== 'qabasat-alyaqeen')){
+      showToast('هذا الملف ليس نسخةً احتياطية من هذا التطبيق', 4000);
+      return;
+    }
+    if(!confirm('سيتم دمج المفضلة والملاحظات الموجودة في الملف مع ما لديك الآن (ولن يُحذف شيء من الحالي). هل تريد المتابعة؟')) return;
+
+    let addedFav = 0, addedNotes = 0;
+    try{
+      // دمج المفضلة (مع تحويل المعرّفات القديمة إن وُجدت)
+      const cur = loadFavorites();
+      (payload.favorites || []).forEach(id=>{
+        const uid = /::-?\d+$/.test(id) ? uidFromLegacyId(id) : id;
+        if(uid && cur.indexOf(uid) < 0){ cur.push(uid); addedFav++; }
+      });
+      saveFavorites(cur);
+
+      // دمج الملاحظات: عند التعارض تُدمج النسختان ولا تُطمس ملاحظةٌ قائمة
+      const notes = loadNotes();
+      Object.keys(payload.notes || {}).forEach(k=>{
+        const uid = /::-?\d+$/.test(k) ? uidFromLegacyId(k) : k;
+        if(!uid) return;
+        const incoming = String(payload.notes[k] || '').trim();
+        if(!incoming) return;
+        if(!notes[uid]){ notes[uid] = incoming; addedNotes++; }
+        else if(notes[uid].trim() !== incoming){ notes[uid] = notes[uid] + '\n— — —\n' + incoming; addedNotes++; }
+      });
+      saveNotes(notes);
+
+      if(payload.prefs) savePrefs(payload.prefs);
+    }catch(err){
+      showToast('حدث خلل أثناء الاستعادة');
+      return;
+    }
+    applySavedPrefs();
+    buildBubbles();
+    renderStatic(curI);
+    showToast(`تمت الاستعادة: أُضيف ${addedFav} إلى المفضلة و${addedNotes} ملاحظة`, 3600);
+  };
+  reader.onerror = ()=> showToast('تعذّرت قراءة الملف');
+  reader.readAsText(file);
 });
 
 document.getElementById('prevArrow').addEventListener('click', ()=> goTo(-1));
@@ -2924,8 +3374,127 @@ document.getElementById('jumpInput').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter') doJump();
 });
 
+/* ---------- طبقة إتاحة الوصول بلوحة المفاتيح ---------- */
+(function setupKeyboardAccess(){
+  // تفعيل العناصر ذات role="button" بمفتاحي Enter و Space
+  ['menuBtn','randomBtn','customizeBtn'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); el.click(); }
+    });
+  });
+
+  // مزامنة حالة لوحة التخصيص لقارئ الشاشة
+  const cb = document.getElementById('customizeBtn');
+  if(cb){
+    cb.addEventListener('click', ()=>{
+      cb.setAttribute('aria-expanded', document.getElementById('customPanel').classList.contains('show') ? 'true' : 'false');
+    });
+  }
+
+  // Escape يغلق آخر نافذة فُتحت (لا أولى نافذة في ترتيبٍ ثابت)، إذ قد تتراكم نافذتان
+  const OVERLAYS = ['noteOverlay','fruitsOverlay','guideOverlay','dailyOverlay','prefaceOverlay','topicsOverlay','pdfOverlay','bubbleOverlay'];
+  const overlayStack = [];
+  function noteOverlayOpened(id){
+    const i = overlayStack.indexOf(id);
+    if(i >= 0) overlayStack.splice(i, 1);
+    overlayStack.push(id);
+  }
+  function noteOverlayClosed(id){
+    const i = overlayStack.indexOf(id);
+    if(i >= 0) overlayStack.splice(i, 1);
+  }
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    const tag = (e.target.tagName || '').toLowerCase();
+    if(tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    for(let i = overlayStack.length - 1; i >= 0; i--){
+      const el = document.getElementById(overlayStack[i]);
+      if(el && el.classList.contains('show')){
+        el.classList.remove('show');
+        e.preventDefault();
+        return;
+      }
+    }
+    // احتياط: لو فُتحت نافذة بطريقٍ لم يُرصد
+    for(const id of OVERLAYS){
+      const el = document.getElementById(id);
+      if(el && el.classList.contains('show')){ el.classList.remove('show'); e.preventDefault(); return; }
+    }
+  });
+
+  // الأسهم للتنقّل بين الفوائد (مع مراعاة اتجاه الصفحة من اليمين لليسار)
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const tag = (e.target.tagName || '').toLowerCase();
+    if(tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    if(document.querySelector('.bubble-overlay.show')) return;
+    e.preventDefault();
+    goTo(e.key === 'ArrowLeft' ? 1 : -1);
+  });
+
+  // النوافذ: وسمها كحواراتٍ، ونقل التركيز إلى زر الإغلاق عند فتحها
+  const closers = { bubbleOverlay:'bubbleClose', pdfOverlay:'pdfClose', topicsOverlay:'topicsClose',
+                    prefaceOverlay:'prefaceClose', guideOverlay:'guideClose', dailyOverlay:'dailyClose',
+                    fruitsOverlay:'fruitsClose', noteOverlay:'noteClose' };
+  Object.keys(closers).forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.setAttribute('role','dialog');
+    el.setAttribute('aria-modal','true');
+    const closeEl = document.getElementById(closers[id]);
+    if(closeEl){
+      closeEl.setAttribute('role','button');
+      closeEl.setAttribute('tabindex','0');
+      closeEl.setAttribute('aria-label','إغلاق');
+      closeEl.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); closeEl.click(); }
+      });
+    }
+    if(typeof MutationObserver === 'function'){
+      new MutationObserver(()=>{
+        if(el.classList.contains('show')){
+          noteOverlayOpened(id);
+          if(closeEl){ try{ closeEl.focus({preventScroll:true}); }catch(err){} }
+        } else {
+          noteOverlayClosed(id);
+        }
+      }).observe(el, { attributes:true, attributeFilter:['class'] });
+    }
+  });
+})();
+
+applySavedPrefs();
 checkSingleMode();
 buildBubbles();
+
+/* ---------- شريط "تابع القراءة" ---------- */
+(function setupResumeChip(){
+  const chip = document.getElementById('resumeChip');
+  const goBtn = document.getElementById('resumeGoBtn');
+  const dismiss = document.getElementById('resumeDismiss');
+  const label = document.getElementById('resumeLabel');
+  if(!chip) return;
+
+  // إن فُتح التطبيق من رابط فائدة معيّنة فلا معنى لعرض الشريط
+  if(/^#(f|q)=/.test(location.hash)) return;
+
+  const pos = loadReadingPosition();
+  if(!pos || !pos.uid) return;
+  const found = findQuoteByUid(pos.uid);
+  if(!found) return;
+
+  label.textContent = 'توقّفتَ عند ' + (pos.label || found.cat.label);
+  chip.classList.add('show');
+
+  goBtn.addEventListener('click', ()=>{
+    chip.classList.remove('show');
+    jumpToUid(pos.uid);
+  });
+  dismiss.addEventListener('click', ()=> chip.classList.remove('show'));
+})();
+
 (function renderQuoteCounter(){
   const total = visibleData.reduce((sum, cat) => sum + cat.quotes.length, 0);
   const el = document.getElementById('quoteCounter');
