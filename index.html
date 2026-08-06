@@ -368,9 +368,18 @@
   .leaf .face.back{transform:rotateY(180deg);}
 
   .page-content{
+    width:100%; height:100%; box-sizing:border-box; position:relative;
+    background:var(--card-bg); border:1px solid var(--line);
+    overflow:hidden; box-shadow:inset 0 0 30px rgba(0,0,0,.03);
+  }
+  /* الغلافُ الداخليُّ القابل للتمرير: يحمل الحشو والنصّ، بمعزلٍ عن البرواز الزخرفي
+     الثابت (::before والزوايا) في .page-content؛ فمهما طال النصّ يتمرّر النصّ وحده
+     ولا يتجاوز البرواز أبدًا، لأن حدود البرواز مرسومةٌ على الصندوق الثابت الخارجي
+     لا على المحتوى المتمرّر. */
+  .card-scroll{
     width:100%; height:100%; box-sizing:border-box; display:flex; flex-direction:column;
-    background:var(--card-bg); border:1px solid var(--line); padding:calc(40px * var(--scale)) calc(24px * var(--scale)) calc(16px * var(--scale));
-    overflow-y:auto; position:relative; box-shadow:inset 0 0 30px rgba(0,0,0,.03);
+    padding:calc(40px * var(--scale)) calc(24px * var(--scale)) calc(16px * var(--scale));
+    overflow-y:auto;
   }
   .page-slot.left .page-content{border-radius:16px 0 0 16px;}
   .page-slot.right .page-content{border-radius:0 16px 16px 0;}
@@ -484,7 +493,7 @@
     .bubble .b-label{font-size:9.5px;}
     .menu-btn{width:42px; height:42px; top:12px; inset-inline-end:12px;}
     .section-title{font-size:22px; margin:4px 0 18px;}
-    .page-content{padding:calc(34px * var(--scale)) calc(18px * var(--scale)) calc(12px * var(--scale));}
+    .card-scroll{padding:calc(34px * var(--scale)) calc(18px * var(--scale)) calc(12px * var(--scale));}
     .page-content .quote-text{font-size:calc(15.5px * var(--scale)); line-height:1.9;}
     .page-content .quote-mark{font-size:calc(28px * var(--scale));}
     footer{font-size:11.5px; margin-top:36px;}
@@ -1745,7 +1754,6 @@ function cardHTML(cat, q){
   const hasExcerpt = excerptText.trim().length > 0;
   return `
     <span class="badge">${cat.label}</span>
-    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
     <div class="app-header-block">
       <div class="ahb-title">قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ</div>
       <div class="ahb-compiler">جمع كليب بن أحمد بن ضيف الله الزهراني</div>
@@ -1822,16 +1830,17 @@ function buildPageEl(item){
     return div;
   }
   div.dataset.frame = currentFrame;
+  const corners = '<div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>';
   if(item.isFavRef){
-    div.innerHTML = favRefHTML();
+    div.innerHTML = corners + '<div class="card-scroll">' + favRefHTML() + '</div>';
   } else if(item.isEmptyFav){
     div.innerHTML = '<div class="page-empty">⭐<br><span style="font-size:14px; margin-top:10px; display:inline-block;">لم تُضِفْ أي فائدة إلى المفضلة بعد</span></div>';
   } else if(item.isTopicRef){
-    div.innerHTML = topicRefHTML(item.topic);
+    div.innerHTML = corners + '<div class="card-scroll">' + topicRefHTML(item.topic) + '</div>';
   } else if(item.isEmptyTopic){
     div.innerHTML = `<div class="page-empty">📚<br><span style="font-size:14px; margin-top:10px; display:inline-block;">لم نجد فوائد مطابقة لموضوع "${item.topic ? item.topic.label : ''}" بعد</span></div>`;
   } else {
-    div.innerHTML = cardHTML(item.cat, item.q);
+    div.innerHTML = corners + '<div class="card-scroll">' + cardHTML(item.cat, item.q) + '</div>';
   }
   const isSpecial = item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
   div._q = isSpecial ? null : item.q;
