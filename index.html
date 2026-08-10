@@ -128,6 +128,15 @@
   .menu-btn:hover{transform:scale(1.06);}
   .menu-btn .bar{width:20px; height:2px; background:var(--accent-dark); border-radius:2px; margin:2px 0;}
 
+  .share-app-btn{
+    position:fixed; top:16px; inset-inline-start:16px; z-index:45;
+    width:46px; height:46px; border-radius:50%;
+    background:var(--card-bg); border:1px solid var(--line); box-shadow:var(--shadow);
+    display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--accent-dark);
+    cursor:pointer; transition:transform .2s ease;
+  }
+  .share-app-btn:hover{transform:scale(1.06);}
+
   .bubble-overlay{
     position:fixed; inset:0; z-index:60;
     background:radial-gradient(circle at 30% 20%, rgba(166,124,46,.20), transparent 55%), rgba(15,12,7,.72);
@@ -492,6 +501,7 @@
     .bubble .b-icon{font-size:18px;}
     .bubble .b-label{font-size:9.5px;}
     .menu-btn{width:42px; height:42px; top:12px; inset-inline-end:12px;}
+    .share-app-btn{width:42px; height:42px; top:12px; inset-inline-start:12px; font-size:17px;}
     .section-title{font-size:22px; margin:4px 0 18px;}
     .card-scroll{padding:calc(34px * var(--scale)) calc(18px * var(--scale)) calc(12px * var(--scale));}
     .page-content .quote-text{font-size:calc(15.5px * var(--scale)); line-height:1.9;}
@@ -511,6 +521,7 @@
 <a class="skip-link" href="#mainContent">تخطَّ إلى الفوائد</a>
 <div class="bg-pattern" aria-hidden="true"></div>
 <div class="menu-btn" id="menuBtn" role="button" tabindex="0" aria-label="فتح قائمة الأبواب" aria-haspopup="dialog"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+<div class="share-app-btn" id="shareAppBtn" role="button" tabindex="0" aria-label="شارك التطبيق" aria-haspopup="dialog">📢</div>
 
 <div class="wrap">
 
@@ -711,6 +722,7 @@
         <li><strong>على الجوال:</strong> مرّر بإصبعك يمينًا أو شمالًا على البطاقة للانتقال بين الفوائد، أو استخدم سهمي التنقل على جانبي الشاشة.</li>
         <li><strong>على الحاسوب:</strong> اضغط مع السحب بالفأرة، أو استخدم سهمي التنقل، أو اكتب رقم صفحة في خانة "اذهب إلى" أسفل الشاشة والقفز إليها مباشرة.</li>
         <li><strong>الفقاعات العائمة (☰):</strong> افتحها للتنقل السريع بين الأبواب، المفضلة، الفهرس الموضوعي، فائدة اليوم، ومقدمة التطبيق.</li>
+        <li><strong>📢 شارك التطبيق:</strong> زرٌّ ثابتٌ في الأعلى مقابل زر القائمة، يفتح مباشرةً نافذة المشاركة بدعائها الخاص.</li>
       </ul>
       <p class="preface-bism" style="font-size:16px; margin-top:20px;">🔍 البحث والتصفح الذكي</p>
       <ul class="preface-list">
@@ -726,8 +738,11 @@
         <li><strong>🎨 المظهر:</strong> من قائمة التخصيص غيّر ألوان السمة، وحجم البطاقة، والإطار، ونوع الخط العربي — وتُحفظ اختياراتك فتعود كما تركتها في كل زيارة.</li>
         <li><strong>💾 نسخة احتياطية:</strong> من قائمة التخصيص احفظ مفضلتك وملاحظاتك في ملفٍ واحد، واستعدها متى شئت أو انقلها إلى جهازٍ آخر. وهذا مهم؛ لأن ما يُحفظ في المتصفح يُمحى بمسح بيانات التصفح.</li>
         <li><strong>▶ تابع القراءة:</strong> يتذكّر التطبيق آخر فائدةٍ وقفتَ عندها، ويعرض لك عند فتحه زرًّا يعيدك إليها مباشرة.</li>
+        <li><strong>📊 إحصائياتك:</strong> يعرض هذا الدليل عدد الفوائد التي قرأتها وسلسلة أيام قراءتك المتتالية، محسوبةً من هذا الجهاز فقط.</li>
         <li><strong>🔄 تنبيه الفوائد الجديدة:</strong> إن أُضيفت فوائد جديدة منذ زيارتك السابقة يظهر لك تنبيهٌ بذلك عند فتح التطبيق، واضغط عليه لينقلك مباشرةً إلى أول فائدةٍ جديدة. وإن بقيت الصفحة مفتوحة طويلًا يفحص التطبيق بين حينٍ وآخر هل صدرت فوائد جديدة، فيعرض لك زر "تحديث الآن" إن وُجدت.</li>
       </ul>
+      <p class="preface-bism" style="font-size:16px; margin-top:20px;">📊 إحصائياتك</p>
+      <div id="myStatsBox" class="ref-note" style="text-align:center; font-size:14px;">—</div>
       <p class="preface-bism" style="font-size:16px; margin-top:20px;">📤 مشاركة فائدة</p>
       <ul class="preface-list">
         <li><strong>⭳ تحميل كصورة:</strong> يحوّل البطاقة الحالية إلى صورة أنيقة تُحفظ على جهازك.</li>
@@ -753,6 +768,30 @@
         <tr><td>الأبواب المتاحة الآن</td><td id="guideVolumeCount">—</td></tr>
       </table>
       <div class="ref-note">مصنّفة حسب أجزاء "مجموع الفتاوى" وعناوينها الأصلية؛ وسيتم -بإذن الله- إدراج فوائد بقية الأجزاء تدريجيًا في الإصدارات القادمة.</div>
+    </div>
+  </div>
+
+  <div class="bubble-overlay" id="shareAppOverlay">
+    <div class="bubble-overlay-head">
+      <div>
+        <div class="bubble-title">📢 شارك التطبيق</div>
+        <div class="bubble-sub">كن سببًا في وصول هذا الخير إلى غيرك</div>
+      </div>
+      <div class="bubble-close" id="shareAppClose">✕</div>
+    </div>
+    <div class="preface-panel">
+      <p class="preface-bism" style="font-size:16px;">🤲 دعاءٌ لمن شارك</p>
+      <div style="text-align:center; font-size:14.5px; line-height:2.1; color:var(--gold-light,#cfc6ae); max-width:480px; margin:0 auto 22px; padding:16px; background:rgba(255,255,255,.05); border-radius:12px; border-inline-start:3px solid var(--gold-light,#cfc6ae);">
+        اللهم بارك لمن شارك هذا التطبيق، واجعله في ميزان حسناته، وانفعه واجعله من العلم الذي ينتفع به بعد موته، وارزق كل من قرأ فيه أو انتفع به الفقه في الدين والعمل الصالح.
+      </div>
+      <div style="text-align:center; font-size:13.5px; color:var(--ink-soft,#a89f8a); margin-bottom:18px; line-height:1.9;">
+        شارِك التطبيق مع من تحب من أهلك وأصدقائك؛ فدلّ الخير كفاعله، ولك أجر كل من قرأ فيه أو استفاد منه — بإذن الله.
+      </div>
+      <div style="text-align:center; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <div class="pdf-quick-btn" id="shareAppWhatsapp" style="display:inline-block; padding:10px 22px;">✆ واتساب</div>
+        <div class="pdf-quick-btn" id="shareAppTelegram" style="display:inline-block; padding:10px 22px;">✈ تيليجرام</div>
+        <div class="pdf-mini-btn" id="shareAppCopy" style="display:inline-block;">📋 نسخ رسالة الدعوة</div>
+      </div>
     </div>
   </div>
 
@@ -1458,6 +1497,10 @@ const data = [
     { text:"الشَّرُّ لَيْسَ إلَى اللَّهِ بِوَجْهٍ مِنْ الْوُجُوهِ. فَإِنَّهُ - وَإِنْ كَانَ اللَّهُ خَالِقَ أَفْعَالِ الْعِبَادِ - فَخَلْقُهُ لِلطَّاعَاتِ: نِعْمَةٌ وَرَحْمَةٌ وَخَلْقُهُ لِلسَّيِّئَاتِ: لَهُ فِيهِ حِكْمَةٌ وَرَحْمَةٌ وَهُوَ - مَعَ هَذَا - عَدْلٌ مِنْهُ فَمَا ظَلَمَ النَّاسَ شَيْئًا. وَلَكِنَّ النَّاسَ ظَلَمُوا أَنْفُسَهُمْ. وَظُلْمُهُمْ لِأَنْفُسِهِمْ نَوْعَانِ: عَدَمُ عَمَلِهِمْ بِالْحَسَنَاتِ. فَهَذَا لَيْسَ مُضَافًا إلَيْهِ. وَعَمَلُهُمْ لِلسَّيِّئَاتِ: خَلَقَهُ عُقُوبَةً لَهُمْ عَلَى تَرْكِ فِعْلِ الْحَسَنَاتِ الَّتِي خَلَقَهُمْ لَهَا وَأَمَرَهُمْ بِهَا. فَكُلُّ نِعْمَةٍ مِنْهُ فَضْلٌ. وَكُلُّ نِقْمَةٍ مِنْهُ عَدْلٌ", source:"مجموع الفتاوى، ج١٤ ص٣٣٤", place:"الشر ليس إلى الله بوجهٍ من الوجوه؛ فكل نعمةٍ منه فضل وكل نقمةٍ منه عدل" },
     { text:"مَنْ تَدَبَّرَ الْقُرْآنَ: تَبَيَّنَ لَهُ أَنَّ عَامَّةَ مَا يَذْكُرُهُ اللَّهُ فِي خَلْقِ الْكَفْرِ وَالْمَعَاصِي يَجْعَلُهُ جَزَاءً لِذَلِكَ الْعَمَلِ. كَقَوْلِهِ تَعَالَى ﴿فَمَنْ يُرِدِ اللَّهُ أَنْ يَهْدِيَهُ يَشْرَحْ صَدْرَهُ لِلْإِسْلَامِ وَمَنْ يُرِدْ أَنْ يُضِلَّهُ يَجْعَلْ صَدْرَهُ ضَيِّقًا حَرَجًا كَأَنَّمَا يَصَّعَّدُ فِي السَّمَاءِ كَذَلِكَ يَجْعَلُ اللَّهُ الرِّجْسَ عَلَى الَّذِينَ لَا يُؤْمِنُونَ﴾ وَقَالَ تَعَالَى ﴿فَلَمَّا زَاغُوا أَزَاغَ اللَّهُ قُلُوبَهُمْ﴾ وَقَالَ تَعَالَى ﴿وَأَمَّا مَنْ بَخِلَ وَاسْتَغْنَى﴾ ﴿وَكَذَّبَ بِالْحُسْنَى﴾ ﴿فَسَنُيَسِّرُهُ لِلْعُسْرَى﴾. وَهَذَا وَأَمْثَالُهُ: بَذَلُوا فِيهِ أَعْمَالًا عَاقَبَهُمْ بِهَا عَلَى فِعْلٍ مَحْظُورٍ وَتَرْكٍ مَأْمُورٍ. وَتِلْكَ الْأُمُورُ إنَّمَا كَانَتْ مِنْهُمْ وَخُلِقَتْ فِيهِمْ لِكَوْنِهِمْ لَمْ يَفْعَلُوا مَا خُلِقُوا لَهُ. وَلَا بُدَّ لَهُمْ مِنْ حَرَكَةٍ وَإِرَادَةٍ. فَلَمَّا لَمْ يَتَحَرَّكُوا بِالْحَسَنَاتِ: حُرِّكُوا بِالسَّيِّئَاتِ عَدْلًا مِنْ اللَّهِ. حَيْثُ وَضَعَ ذَلِكَ مَوْضِعَهُ فِي مَحَلِّهِ الْقَابِلِ لَهُ - وَهُوَ الْقَلْبُ الَّذِي لَا يَكُونُ إلَّا عَامِلًا - فَإِذَا لَمْ يَعْمَلْ الْحَسَنَةَ اُسْتُعْمِلَ فِي عَمَلِ السَّيِّئَةِ. كَمَا قِيلَ: نَفْسُك إنْ لَمْ تَشْغَلْهَا شَغَلَتْك", source:"مجموع الفتاوى، ج١٤ ص٣٣٥", place:"القلب لا يكون إلا عاملًا، فمن لم يشغله بالحسنات شُغل بالسيئات عدلًا من الله" },
     { text:"السَّيِّئَاتُ الَّتِي تُصِيبُ الْإِنْسَانَ - وَهِيَ مَصَائِبُ الدُّنْيَا وَالْآخِرَةِ - لَيْسَ لَهَا سَبَبٌ إلَّا ذَنْبَهُ الَّذِي هُوَ مِنْ نَفْسِهِ. فَانْحَصَرَتْ فِي نَفْسِهِ. وَأَمَّا مَا يُصِيبُهُ مِنْ الْخَيْرِ وَالنِّعَمِ: فَإِنَّهُ لَا تَنْحَصِرُ أَسْبَابُهُ. لِأَنَّ ذَلِكَ مِنْ فَضْلِ اللَّهِ وَإِحْسَانِهِ يَحْصُلُ بِعَمَلِهِ وَبِغَيْرِ عَمَلِهِ. وَعَمَلُهُ نَفْسُهُ مِنْ إنْعَامِ اللَّهِ عَلَيْهِ. وَهُوَ سُبْحَانَهُ لَا يَجْزِي بِقَدْرِ الْعَمَلِ بَلْ يُضَاعِفُهُ لَهُ. وَلَا يَقْدِرُ الْعَبْدُ عَلَى ضَبْطِ أَسْبَابِهَا لَكِنْ يَعْلَمُ أَنَّهَا مِنْ فَضْلِ اللَّهِ وَإِنْعَامِهِ. فَيَرْجِعُ فِيهَا إلَى اللَّهِ. فَلَا يَرْجُو إلَّا اللَّهَ. وَلَا يَتَوَكَّلُ إلَّا عَلَيْهِ. وَيَعْلَمُ أَنَّ النِّعَمَ كُلَّهَا مِنْ اللَّهِ. وَأَنَّ كُلَّ مَا خَلَقَهُ فَهُوَ نِعْمَةٌ", source:"مجموع الفتاوى، ج١٤ ص٣٣٩", place:"مصائب الإنسان محصورةٌ في ذنبه، أما النعم فأسبابها لا تنحصر إذ هي من فضل الله" },
+    { text:"وَفِي الصَّحِيحَيْنِ عَنْ النَّبِيِّ صلى الله عليه وسلم أَنَّهُ قَالَ: مَا مِنْ دَاعٍ يَدْعُو اللَّهَ بِدَعْوَةٍ لَيْسَ فِيهَا ظُلْمٌ وَلَا قَطِيعَةُ رَحِمٍ: إلَّا أَعْطَاهُ اللَّهُ بِهَا إحْدَى خِصَالٍ ثَلَاثٍ: إمَّا أَنْ يُعَجِّلَ لَهُ دَعْوَتَهُ. وَإِمَّا أَنْ يَدَّخِرَ لَهُ مِنْ الْخَيْرِ مِثْلَهَا. وَإِمَّا أَنْ يَصْرِفَ عَنْهُ مِنْ الشَّرِّ مِثْلَهَا. فَالدَّعْوَةُ الَّتِي لَيْسَ فِيهَا اعْتِدَاءٌ يَحْصُلُ بِهَا الْمَطْلُوبُ أَوْ مِثْلُهُ. وَهَذَا غَايَةُ الْإِجَابَةِ. فَإِنَّ الْمَطْلُوبَ بِعَيْنِهِ قَدْ يَكُونُ مُمْتَنِعًا. أَوْ مُفْسِدًا لِلدَّاعِي أَوْ لِغَيْرِهِ. وَالدَّاعِي جَاهِلٌ لَا يَعْلَمُ مَا فِيهِ الْمَفْسَدَةُ عَلَيْهِ. وَالرَّبُّ قَرِيبٌ مُجِيبٌ. وَهُوَ أَرْحَمُ بِعِبَادِهِ مِنْ الْوَالِدَةِ بِوَلَدِهَا", source:"مجموع الفتاوى، ج١٤ ص٣٦٧", place:"الخصال الثلاث التي يُعطاها الداعي حتمًا؛ فالدعوة السليمة لا تُردّ بل تُعجَّل أو تُدَّخر أو يُصرَف بها شرٌّ مثلها" },
+    { text:"الْكَرِيمُ الرَّحِيمُ إذَا سُئِلَ شَيْئًا بِعَيْنِهِ وَعَلِمَ أَنَّهُ لَا يَصْلُحُ لِلْعَبْدِ إعْطَاؤُهُ: أَعْطَاهُ نَظِيرَهُ كَمَا يَصْنَعُ الْوَالِدُ بِوَلَدِهِ إذَا طَلَبَ مِنْهُ مَا لَيْسَ لَهُ. فَإِنَّهُ يُعْطِيهِ مِنْ مَالِهِ نَظِيرَهُ. وَلِلَّهِ الْمَثَلُ الْأَعْلَى. وَكَمَا فَعَلَ النَّبِيُّ صلى الله عليه وسلم لَمَّا طَلَبَتْ مِنْهُ طَائِفَةٌ مِنْ بَنِي عَمِّهِ أَنْ يُوَلِّيَهُمْ وِلَايَةً لَا تَصْلُحُ لَهُمْ - فَأَعْطَاهُمْ مِنْ الْخُمُسِ مَا أَغْنَاهُمْ عَنْ ذَلِكَ وَزَوَّجَهُمْ كَمَا فَعَلَ بِالْفَضْلِ بْنِ عَبَّاسٍ وَرَبِيعَةَ بْنِ الْحَارِثِ بْنِ عَبْدِ الْمُطَّلِبِ. وَقَدْ رُوِيَ فِي الْحَدِيثِ: لَيْسَ شَيْءٌ أَكْرَمَ عَلَى اللَّهِ مِنْ الدُّعَاءِ. وَهَذَا حَقٌّ", source:"مجموع الفتاوى، ج١٤ ص٣٦٨", place:"إذا سُئل الكريم ما لا يصلح أعطى نظيره، كما فعل النبي صلى الله عليه وسلم مع بني عمه" },
+    { text:"لَمَّا كَانَ الْأَمْرُ كَمَا أَخْبَرَ اللَّهُ بِهِ فِي قَوْلِهِ ﴿مَا أَصَابَكَ مِنْ حَسَنَةٍ فَمِنَ اللَّهِ وَمَا أَصَابَكَ مِنْ سَيِّئَةٍ فَمِنْ نَفْسِكَ﴾ أَوْجَبَ هَذَا: أَنْ لَا يَطْلُبَ الْعَبْدُ الْحَسَنَاتِ - وَالْحَسَنَاتُ تَدْخُلُ فِيهَا كُلُّ نِعْمَةٍ - إلَّا مِنْ اللَّهِ. وَأَنْ يَعْلَمَ أَنَّهَا مِنْ اللَّهِ وَحْدَهُ فَيَسْتَحِقُّ اللَّهُ عَلَيْهَا الشُّكْرَ الَّذِي لَا يَسْتَحِقُّهُ غَيْرُهُ. وَيَعْلَمُ أَنَّهُ لَا إلَهَ إلَّا هُوَ. كَمَا قَالَ تَعَالَى ﴿وَمَا بِكُمْ مِنْ نِعْمَةٍ فَمِنَ اللَّهِ﴾. فَهَذَا يُوجِبُ عَلَى الْعَبْدِ شُكْرَهُ وَعِبَادَتَهُ وَحْدَهُ. ثُمَّ قَالَ ﴿ثُمَّ إذَا مَسَّكُمُ الضُّرُّ فَإِلَيْهِ تَجْأَرُونَ﴾ وَهَذَا إخْبَارٌ عَنْ حَالِهِمْ وَالْجُؤَارُ: يَتَضَمَّنُ رَفْعَ الصَّوْتِ. وَالْإِنْسَانُ إنَّمَا يَجْأَرُ إذَا أَصَابَهُ الضُّرُّ. وَأَمَّا فِي حَالِ النِّعْمَةِ: فَهُوَ سَاكِنٌ إمَّا شَاكِرًا وَإِمَّا كَفُورًا ﴿ثُمَّ إذَا مَسَّكُمُ الضُّرُّ فَإِلَيْهِ تَجْأَرُونَ﴾ ﴿ثُمَّ إذَا كَشَفَ الضُّرَّ عَنْكُمْ إذَا فَرِيقٌ مِنْكُمْ بِرَبِّهِمْ يُشْرِكُونَ﴾", source:"مجموع الفتاوى، ج١٤ ص٣٦٩", place:"وجوب طلب الحسنات من الله وحده وشكره عليها، والجؤار عند الضر دون النعمة" },
+    { text:"لَمَّا كَانَتْ الْحَسَنَةُ مِنْ إحْسَانِهِ تَعَالَى وَالْمَصَائِبُ مِنْ نَفْسِ الْإِنْسَانِ - وَإِنْ كَانَتْ بِقَضَاءِ اللَّهِ وَقَدَرِهِ - وَجَبَ عَلَى الْعَبْدِ أَنْ يَشْكُرَ رَبَّهُ سُبْحَانَهُ وَأَنْ يَسْتَغْفِرَهُ مِنْ ذُنُوبِهِ. وَأَلَّا يَتَوَكَّلَ إلَّا عَلَيْهِ وَحْدَهُ. فَلَا يَأْتِي بِالْحَسَنَاتِ إلَّا هُوَ. فَأَوْجَبَ ذَلِكَ لِلْعَبْدِ: تَوْحِيدَهُ وَالتَّوَكُّلَ عَلَيْهِ وَحْدَهُ وَالشُّكْرَ لَهُ وَحْدَهُ وَالِاسْتِغْفَارَ مِنْ الذُّنُوبِ", source:"مجموع الفتاوى، ج١٤ ص٣٧٥", place:"الحسنة من إحسان الله والمصيبة من نفس الإنسان، وهذا يوجب التوحيد والتوكل والشكر والاستغفار" },
   ]},
   { key:"v15", label:"ج١٥: التفسير ٢ (الأعراف - الأحزاب)", icon:"📖", quotes:[
     { text:"قد يكونُ العذابُ من عندِ اللهِ، وقد يكونُ بأيدي العبادِ، فإذا تركَ الناسُ الجهادَ في سبيلِ اللهِ فقد يبتليهم بأن يوقعَ بينهم العداوةَ، أمّا إذا اشتغلوا بالجهادِ جمعَ اللهُ قلوبَهم وألّفَ بينهم", source:"مجموع الفتاوى، ج١٥ ص٤٤", place:"في تفسير آيات الابتلاء بالفرقة" },
@@ -1951,6 +1994,7 @@ function buildPageEl(item){
     div.innerHTML = `<div class="page-empty">📚<br><span style="font-size:14px; margin-top:10px; display:inline-block;">لم نجد فوائد مطابقة لموضوع "${item.topic ? item.topic.label : ''}" بعد</span></div>`;
   } else {
     div.innerHTML = corners + '<div class="card-scroll">' + cardHTML(item.cat, item.q) + '</div>';
+    recordQuoteRead(item.cat.key, item.q);
   }
   const isSpecial = item.isFavRef || item.isEmptyFav || item.isTopicRef || item.isEmptyTopic;
   div._q = isSpecial ? null : item.q;
@@ -2332,6 +2376,9 @@ function toggleBubbleMenu(){
 }
 
 document.getElementById('menuBtn').addEventListener('click', toggleBubbleMenu);
+document.getElementById('shareAppBtn').addEventListener('click', ()=>{
+  document.getElementById('shareAppOverlay').classList.add('show');
+});
 document.getElementById('bubbleClose').addEventListener('click', closeBubbleMenu);
 document.getElementById('bubbleOverlay').addEventListener('click', (e)=>{
   if(e.target.id === 'bubbleOverlay') closeBubbleMenu();
@@ -2392,6 +2439,27 @@ document.getElementById('guideClose').addEventListener('click', ()=>{
 document.getElementById('guideOverlay').addEventListener('click', (e)=>{
   if(e.target.id === 'guideOverlay') document.getElementById('guideOverlay').classList.remove('show');
 });
+document.getElementById('shareAppClose').addEventListener('click', ()=>{
+  document.getElementById('shareAppOverlay').classList.remove('show');
+});
+document.getElementById('shareAppOverlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'shareAppOverlay') document.getElementById('shareAppOverlay').classList.remove('show');
+});
+
+/* ---------- شارك التطبيق (لا فائدةٍ معينة، بل التطبيق نفسه) ---------- */
+const APP_SHARE_URL = 'https://kmasskmass-svg.github.io/IbnTaimeaGabasat/';
+const APP_INVITE_TEXT = 'قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ — فوائد منتقاة وموثّقة من مجموع فتاوى شيخ الإسلام ابن تيمية، بحثٌ وقراءةٌ ومشاركةٌ ميسّرة:\n' + APP_SHARE_URL;
+document.getElementById('shareAppWhatsapp').addEventListener('click', ()=>{
+  window.open('https://wa.me/?text=' + encodeURIComponent(APP_INVITE_TEXT), '_blank', 'noopener');
+});
+document.getElementById('shareAppTelegram').addEventListener('click', ()=>{
+  window.open('https://t.me/share/url?url=' + encodeURIComponent(APP_SHARE_URL) + '&text=' + encodeURIComponent(APP_INVITE_TEXT.replace(APP_SHARE_URL, '').trim()), '_blank', 'noopener');
+});
+document.getElementById('shareAppCopy').addEventListener('click', async ()=>{
+  const ok = await copyTextToClipboard(APP_INVITE_TEXT);
+  showToast(ok ? 'نُسخت رسالة الدعوة، شاركها كيفما شئت' : 'تعذّر النسخ في هذا المتصفح');
+});
+
 document.getElementById('fruitsClose').addEventListener('click', ()=>{
   document.getElementById('fruitsOverlay').classList.remove('show');
 });
@@ -2474,6 +2542,70 @@ document.getElementById('topicsList').addEventListener('click', (e)=>{
   if(wrap) window.scrollTo({top: wrap.offsetTop - 90, behavior:'smooth'});
 });
 
+/* ---------- تتبّع القراءة: سلسلة الأيام والإحصائيات الشخصية ----------
+ * كل هذا محلّيٌّ على الجهاز فقط (localStorage)، لا يُرسَل لأي خادم. */
+const READ_STATS_KEY = 'qabasat_reading_stats_v1';
+function loadReadStats(){
+  try{
+    const raw = localStorage.getItem(READ_STATS_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      return {
+        readUids: Array.isArray(parsed.readUids) ? parsed.readUids : [],
+        days: parsed.days && typeof parsed.days === 'object' ? parsed.days : {},
+        streak: Number.isFinite(parsed.streak) ? parsed.streak : 0,
+        lastDay: parsed.lastDay || null,
+      };
+    }
+  }catch(e){}
+  return { readUids: [], days: {}, streak: 0, lastDay: null };
+}
+function saveReadStats(stats){
+  try{ localStorage.setItem(READ_STATS_KEY, JSON.stringify(stats)); }catch(e){}
+}
+function yesterdayKey(){
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+}
+let _readStats = null;
+function recordQuoteRead(catKey, q){
+  if(!_readStats) _readStats = loadReadStats();
+  const uid = quoteUid(catKey, q);
+  const today = todayKey();
+  let changed = false;
+
+  if(!_readStats.readUids.includes(uid)){
+    _readStats.readUids.push(uid);
+    changed = true;
+  }
+
+  if(_readStats.lastDay !== today){
+    if(!_readStats.days[today]){
+      _readStats.days[today] = true;
+      changed = true;
+    }
+    // حساب السلسلة: تستمر إن كانت آخر زيارةٍ أمس، وإلا تبدأ من جديد
+    if(_readStats.lastDay === yesterdayKey()){
+      _readStats.streak = (_readStats.streak || 0) + 1;
+    } else if(_readStats.lastDay !== today) {
+      _readStats.streak = 1;
+    }
+    _readStats.lastDay = today;
+    changed = true;
+  }
+
+  if(changed) saveReadStats(_readStats);
+}
+function getReadStatsSummary(){
+  if(!_readStats) _readStats = loadReadStats();
+  return {
+    totalRead: _readStats.readUids.length,
+    totalAvailable: TOTAL_ALL_QUOTES,
+    streak: _readStats.streak || 0,
+  };
+}
+
 /* ---------- daily quote ("فائدة اليوم") ---------- */
 const DAILY_SEEN_KEY = 'qabasat_daily_seen_date';
 function todayKey(){
@@ -2530,6 +2662,17 @@ function openGuideOverlay(){
     const n = visibleData.length;
     const arabicN = String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     el.textContent = `${arabicN} أبواب حاليًا، وتُدرَج بقية أبواب الكتاب تدريجيًا`;
+  }
+  const statsBox = document.getElementById('myStatsBox');
+  if(statsBox){
+    const s = getReadStatsSummary();
+    const ar = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    if(s.totalRead === 0){
+      statsBox.textContent = 'لم تقرأ فوائد بعد على هذا الجهاز. ابدأ التصفح وستظهر إحصائياتك هنا.';
+    } else {
+      const streakPart = s.streak >= 2 ? ` | سلسلة قراءةٍ متتالية: ${ar(s.streak)} ${s.streak === 2 ? 'يومان' : 'أيام'} 🔥` : '';
+      statsBox.textContent = `قرأتَ ${ar(s.totalRead)} فائدةً من أصل ${ar(s.totalAvailable)}${streakPart}`;
+    }
   }
   document.getElementById('guideOverlay').classList.add('show');
 }
@@ -3733,7 +3876,7 @@ document.getElementById('jumpInput').addEventListener('keydown', (e)=>{
 /* ---------- طبقة إتاحة الوصول بلوحة المفاتيح ---------- */
 (function setupKeyboardAccess(){
   // تفعيل العناصر ذات role="button" بمفتاحي Enter و Space
-  ['menuBtn','randomBtn','customizeBtn'].forEach(id=>{
+  ['menuBtn','shareAppBtn','randomBtn','customizeBtn'].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
     el.addEventListener('keydown', (e)=>{
@@ -3750,7 +3893,7 @@ document.getElementById('jumpInput').addEventListener('keydown', (e)=>{
   }
 
   // Escape يغلق آخر نافذة فُتحت (لا أولى نافذة في ترتيبٍ ثابت)، إذ قد تتراكم نافذتان
-  const OVERLAYS = ['noteOverlay','excerptOverlay','fruitsOverlay','guideOverlay','dailyOverlay','prefaceOverlay','topicsOverlay','pdfOverlay','bubbleOverlay'];
+  const OVERLAYS = ['noteOverlay','excerptOverlay','fruitsOverlay','guideOverlay','dailyOverlay','prefaceOverlay','topicsOverlay','pdfOverlay','bubbleOverlay','shareAppOverlay'];
   const overlayStack = [];
   function noteOverlayOpened(id){
     const i = overlayStack.indexOf(id);
@@ -3793,7 +3936,8 @@ document.getElementById('jumpInput').addEventListener('keydown', (e)=>{
   // النوافذ: وسمها كحواراتٍ، ونقل التركيز إلى زر الإغلاق عند فتحها
   const closers = { bubbleOverlay:'bubbleClose', pdfOverlay:'pdfClose', topicsOverlay:'topicsClose',
                     prefaceOverlay:'prefaceClose', guideOverlay:'guideClose', dailyOverlay:'dailyClose',
-                    fruitsOverlay:'fruitsClose', noteOverlay:'noteClose', excerptOverlay:'excerptClose' };
+                    fruitsOverlay:'fruitsClose', noteOverlay:'noteClose', excerptOverlay:'excerptClose',
+                    shareAppOverlay:'shareAppClose' };
   Object.keys(closers).forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
