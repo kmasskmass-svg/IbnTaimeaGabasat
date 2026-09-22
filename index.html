@@ -284,6 +284,8 @@
   .section-title::before, .section-title::after{content:''; display:inline-block; width:36px; height:1px; background:var(--line); vertical-align:middle; margin:0 10px;}
 
   .progress-bar{max-width:420px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; gap:12px; font-size:12.5px; color:var(--ink-soft);}
+  .progress-track{max-width:420px; height:3px; margin:0 auto 6px; background:var(--line); opacity:.5; border-radius:999px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg, var(--gold), var(--accent)); border-radius:999px; transition:width .3s ease;}
   .progress-bar .page-count{font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif; font-weight:500;}
 
   /* ---- search ---- */
@@ -994,6 +996,7 @@
     </div>
   </div>
   <div class="section-title" id="sectionTitle"></div>
+  <div class="progress-track" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
   <div class="progress-bar" id="progressBar"></div>
   <div class="jump-wrap" id="jumpWrap">
     <input type="number" id="jumpInput" min="1" placeholder="رقم الصفحة">
@@ -2490,6 +2493,7 @@ function stepSize(){ return isSpreadMode() ? 2 : 1; }
 function updateHeader(i){
   const sectionTitleEl = document.getElementById('sectionTitle');
   const bar = document.getElementById('progressBar');
+  const fill = document.getElementById('progressFill');
   const item = pages[Math.max(0, Math.min(i, pages.length-1))];
   sectionTitleEl.textContent = (item.isFavRef || item.isEmptyFav) ? '⭐  المفضلة'
     : (item.isTopicRef || item.isEmptyTopic) ? ('📚  ' + (item.topic ? item.topic.label : 'موضوع'))
@@ -2498,6 +2502,10 @@ function updateHeader(i){
     ? (i===0 ? '1' : `${i}–${Math.min(i+1, pages.length)}`)
     : `${i+1}`;
   bar.innerHTML = `<span class="page-count">صفحة ${shown} من ${pages.length}</span>`;
+  if(fill){
+    const pct = pages.length ? Math.min(100, Math.round(((i+1) / pages.length) * 100)) : 0;
+    fill.style.width = pct + '%';
+  }
   updatePermalink(item);
 }
 
@@ -3535,8 +3543,8 @@ function drawFrame(ctx, W, H, frame, gold, goldLight, showOrn){
   ctx.save();
   ctx.strokeStyle = gold;
   if(frame === 'classic'){
-    ctx.globalAlpha = 0.45;
-    ctx.lineWidth = 1.4;
+    ctx.globalAlpha = 0.6;
+    ctx.lineWidth = 1.6;
     ctx.strokeRect(9, 9, W-18, H-18);
   } else if(frame === 'double'){
     ctx.globalAlpha = 0.55;
@@ -3700,24 +3708,31 @@ async function buildCardCanvas(pageEl, overrideText){
   ctx.save();
   roundRectPath(ctx, 0, 0, W, H, radius);
   ctx.clip();
-  const glow = ctx.createRadialGradient(W*0.5, 0, 0, W*0.5, 0, W*0.95);
-  glow.addColorStop(0, hexToRgba(c.goldLight, 0.22));
+  // توهّجٌ ذهبيٌّ علويٌّ أقوى وأوسع، وتوهّجٌ ثانٍ بلون العلامة (accent) من الزاوية
+  // المقابلة، فيمنحان البطاقة ثنائية لونية دافئة بدل الاعتماد على تدرّجٍ واحد باهت.
+  const glow = ctx.createRadialGradient(W*0.5, 0, 0, W*0.5, 0, W*1.05);
+  glow.addColorStop(0, hexToRgba(c.goldLight, 0.32));
   glow.addColorStop(1, hexToRgba(c.goldLight, 0));
   ctx.fillStyle = glow;
   ctx.fillRect(0, 0, W, H);
+  const glow2 = ctx.createRadialGradient(W*0.08, H*0.98, 0, W*0.08, H*0.98, W*0.75);
+  glow2.addColorStop(0, hexToRgba(c.accent, 0.16));
+  glow2.addColorStop(1, hexToRgba(c.accent, 0));
+  ctx.fillStyle = glow2;
+  ctx.fillRect(0, 0, W, H);
   /* التظليل السفلي مشتقٌّ من لون الحبر لا من accent-dark؛ لأن الأخير في الثيم الليلي
-   * ذهبيٌّ فاتح، فكان يضع ضبابًا ذهبيًّا أسفل البطاقة بدل أن يُعتّمها. */
-  const vign = ctx.createLinearGradient(0, H*0.45, 0, H);
+   * ذهبيٌّ فاتح، فكان يضع ضبابًا ذهبيًّا أسفل البطاقة بدل أن يُعتّمها.
+   * خُفِّف مقداره كثيرًا هنا (من .13 إلى .055) فلا يُطفئ إشراق الألوان أعلاه. */
+  const vign = ctx.createLinearGradient(0, H*0.6, 0, H);
   vign.addColorStop(0, hexToRgba(c.ink, 0));
-  vign.addColorStop(1, hexToRgba(c.ink, 0.13));
+  vign.addColorStop(1, hexToRgba(c.ink, 0.055));
   ctx.fillStyle = vign;
   ctx.fillRect(0, 0, W, H);
   if(showOrn) drawPaperGrain(ctx, W, H, c.ink);
   // حاشيةٌ لونيةٌ رفيعةٌ على الحافة اليمنى، توقيعٌ بصريٌّ يُعرف من بعيد
   ctx.fillStyle = c.accent;
-  ctx.globalAlpha = 0.9;
-  ctx.fillRect(W-Math.max(3, Math.round(W*0.006)), 0, Math.max(3, Math.round(W*0.006)), H);
   ctx.globalAlpha = 1;
+  ctx.fillRect(W-Math.max(3, Math.round(W*0.006)), 0, Math.max(3, Math.round(W*0.006)), H);
   ctx.restore();
 
   drawFrame(ctx, W, H, currentFrame, c.gold, c.goldLight, showOrn);
