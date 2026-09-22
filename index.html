@@ -381,7 +381,7 @@
     background:var(--card-bg); border:1px solid var(--line);
     /* حاشيةٌ لونيةٌ على حافة البداية، توقيعٌ بصريٌّ مطابقٌ لحاشية البطاقة المصدَّرة */
     border-inline-start:3px solid var(--accent);
-    overflow:hidden; box-shadow:inset 0 0 30px rgba(0,0,0,.03);
+    overflow:hidden; box-shadow:inset 0 0 34px rgba(0,0,0,.055);
   }
   /* ملمسٌ ورقيٌّ خفيف مطابقٌ لحُبيبات البطاقة المصدَّرة */
   .page-content::after{
@@ -432,17 +432,22 @@
   .page-content[data-frame="gilded"]::before{content:''; position:absolute; inset:6px; border:2px solid rgba(166,124,46,.72); border-radius:2px; pointer-events:none;
     box-shadow:inset 0 0 0 6px rgba(201,155,63,.10), inset 0 0 0 7px rgba(166,124,46,.42);}
   .page-content[data-frame="corners"]::before{display:none;}
-  .page-content[data-frame="corners"] .corner{position:absolute; width:22px; height:22px; border:2px solid var(--gold); opacity:.8; pointer-events:none;}
+  .page-content[data-frame="corners"] .corner{position:absolute; width:26px; height:26px; border:2px solid var(--gold); opacity:.85; pointer-events:none;}
+  .page-content[data-frame="corners"] .corner::after{content:''; position:absolute; width:3px; height:3px; border-radius:50%; background:var(--gold-light);}
   .page-content[data-frame="corners"] .corner.tl{top:8px; inset-inline-start:8px; border-inline-end:none; border-bottom:none;}
+  .page-content[data-frame="corners"] .corner.tl::after{top:-2px; inset-inline-start:-2px;}
   .page-content[data-frame="corners"] .corner.tr{top:8px; inset-inline-end:8px; border-inline-start:none; border-bottom:none;}
+  .page-content[data-frame="corners"] .corner.tr::after{top:-2px; inset-inline-end:-2px;}
   .page-content[data-frame="corners"] .corner.bl{bottom:8px; inset-inline-start:8px; border-inline-end:none; border-top:none;}
+  .page-content[data-frame="corners"] .corner.bl::after{bottom:-2px; inset-inline-start:-2px;}
   .page-content[data-frame="corners"] .corner.br{bottom:8px; inset-inline-end:8px; border-inline-start:none; border-top:none;}
+  .page-content[data-frame="corners"] .corner.br::after{bottom:-2px; inset-inline-end:-2px;}
   .page-content:not([data-frame="corners"]) .corner{display:none;}
   body.no-ornaments .page-content::before, body.no-ornaments .corner{display:none !important;}
 
   .page-content .quote-mark{font-family:var(--quote-font); font-size:calc(34px * var(--scale)); color:var(--gold-light); line-height:1; margin-bottom:2px; opacity:.85;}
   body.no-ornaments .quote-mark{opacity:0;}
-  .page-content .quote-text{font-family:var(--quote-font); font-size:calc(18px * var(--scale)); line-height:2.05; color:var(--ink); flex:1; margin:0 0 14px; display:flex; align-items:center; text-align:justify; text-align-last:right;}
+  .page-content .quote-text{font-family:var(--quote-font); font-size:calc(18px * var(--scale)); line-height:2.05; color:var(--ink); flex:1; margin:auto 0 14px; display:block; text-align:justify; text-align-last:right;}
   /* تمييز نصوص القرآن والحديث {بين قوسين} بلون العلامة التجارية ووزن أثقل قليلًا */
   .page-content .quote-text .citation{color:var(--accent-dark); font-weight:600;}
   body.no-ornaments .page-content .quote-text .citation{color:inherit; font-weight:inherit;}
@@ -452,7 +457,7 @@
   /* فاصلٌ زخرفي مطابقٌ لفاصل البطاقة المصدَّرة: خطّان بينهما نجمة */
   .orn-sep{display:flex; align-items:center; gap:10px; margin:calc(9px * var(--scale)) 0;}
   .orn-sep::before, .orn-sep::after{content:''; flex:1; height:1px; background:var(--line); opacity:.55;}
-  .orn-sep i{font-style:normal; color:var(--gold-light); font-size:11px; line-height:1; opacity:.9;}
+  .orn-sep i{font-style:normal; color:var(--gold-light); font-size:13px; line-height:1; opacity:.95;}
   .orn-sep.narrow{padding-inline:9%;}
   body.no-ornaments .orn-sep i{opacity:0;}
   /* عنوان الفائدة بارزًا فوق النص، كما صار في البطاقة المصدَّرة */
@@ -473,7 +478,7 @@
   }
   .page-content .src{font-size:calc(12.5px * var(--scale)); color:var(--accent-dark); font-weight:500; display:flex; align-items:center; gap:6px;}
   .page-content .place{font-size:calc(11.5px * var(--scale)); color:var(--ink-soft);}
-  .page-content .badge{position:absolute; top:12px; inset-inline-start:16px; background:var(--accent); color:var(--card-bg); font-size:11px; font-weight:500; padding:4px 12px; border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif; z-index:2;}
+  .page-content .badge{position:absolute; top:12px; inset-inline-start:16px; background:linear-gradient(135deg, var(--accent), var(--accent-dark)); color:var(--card-bg); font-size:11px; font-weight:500; letter-spacing:.02em; padding:5px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.18); box-shadow:0 2px 8px rgba(0,0,0,.22); font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif; z-index:2;}
   .page-content .app-header-block{
     text-align:center; padding-bottom:0; margin-bottom:0;
   }
