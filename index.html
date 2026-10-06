@@ -3524,7 +3524,8 @@ function printQuote(cat, q, overrideText){
   const area = document.getElementById('printArea');
   area.innerHTML = `
     <div style="font-family:'Amiri','Traditional Arabic',serif; direction:rtl; text-align:center; color:#1a1a1a;">
-      <div style="font-size:19px; font-weight:700; margin-bottom:6px;">قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ</div>
+      <div style="font-size:19px; font-weight:700; margin-bottom:2px;">قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ</div>
+      <div style="font-size:13px; color:#555; margin-bottom:12px;">فوائد مختارة من مجموع فتاوي ابن تيمية</div>
       <div style="font-size:12px; color:#777; margin-bottom:22px; border-bottom:1px solid #ccc; display:inline-block; padding-bottom:10px;">${cat.icon} ${cat.label}</div>
       ${q.place ? `<div style="font-size:16px; font-weight:700; color:#8a6a22; margin-bottom:20px;">${q.place}</div>` : ''}
       <p style="font-size:21px; line-height:2.5; margin:0 auto 30px; max-width:620px;">${renderText}</p>
@@ -3606,6 +3607,54 @@ function fillJustifiedLineRTL(ctx, lineText, rightX, y, targetWidth){
     x -= ctx.measureText(w).width + gapWidth;
   });
   ctx.textAlign = prevAlign;
+}
+
+/* سطرٌ مُلوَّنُ الكلمات (لتمييز الآيات)، مبرَّرٌ أو غير مبرَّر. words: [{t, col}] */
+function fillColoredLineRTL(ctx, words, rightX, y, targetWidth, justify){
+  const prevAlign = ctx.textAlign, prevFill = ctx.fillStyle;
+  ctx.textAlign = 'right';
+  const spaceW = ctx.measureText(' ').width;
+  const wordsW = words.reduce((a,w)=> a + ctx.measureText(w.t).width, 0);
+  let gap = spaceW;
+  if(justify && words.length > 1){
+    gap = Math.max(spaceW, (targetWidth - wordsW) / (words.length - 1));
+  }
+  let x = rightX;
+  words.forEach(w=>{
+    ctx.fillStyle = w.col;
+    ctx.fillText(w.t, x, y);
+    x -= ctx.measureText(w.t).width + gap;
+  });
+  ctx.fillStyle = prevFill;
+  ctx.textAlign = prevAlign;
+}
+/* تحديد الكلمات الواقعة بين ﴿ و﴾ (لا يُلوَّن إلا ما له قوسُ إغلاق) */
+function markVerseWords(lines){
+  const flat = [];
+  lines.forEach((l, li)=> l.split(' ').filter(Boolean).forEach(t=> flat.push({t, li, verse:false})));
+  /* القوسان يُقترنان بالترتيب بصرف النظر عن اتجاههما: الأول يفتح والتالي يغلق */
+  const isMark = t=> /[\uFD3E\uFD3F]/.test(t);
+  const cnt = t=> (t.match(/[\uFD3E\uFD3F]/g) || []).length;
+  let open = -1;
+  for(let i=0;i<flat.length;i++){
+    const n = cnt(flat[i].t);
+    if(open < 0){
+      if(n >= 2){ flat[i].verse = true; }
+      else if(n === 1){ open = i; }
+    } else if(n >= 1){
+      for(let k=open;k<=i;k++) flat[k].verse = true;
+      open = -1;
+    }
+  }
+  const out = lines.map(()=>[]);
+  flat.forEach(w=> out[w.li].push(w));
+  return out;
+}
+function relLum(hex){
+  const h = (hex || '').replace('#','').trim();
+  if(h.length !== 6) return 1;
+  const f = i=>{ const v = parseInt(h.slice(i,i+2),16)/255; return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); };
+  return 0.2126*f(0)+0.7152*f(2)+0.0722*f(4);
 }
 
 /* استبدالُ الأقواس المعقوفة حول الآيات بقوسي التنزيل المزخرفين عند التصدير فقط،
@@ -3824,10 +3873,12 @@ async function buildCardCanvas(pageEl, overrideText){
   }
 
   const APP_TITLE = 'قَبَسَاتُ اليَقِينِ مِنْ فَتَاوَى تَقِيِّ الدِّينِ';
+  const APP_SUBTITLE = 'فوائد مختارة من مجموع فتاوي ابن تيمية';
   const COMPILER = 'جمع كليب بن أحمد بن ضيف الله الزهراني';
   const DUA = 'غفر الله له ولوالديه ولزوجه وأصلح له في ذريته';
 
   const headerTitleFont = fitSize(APP_TITLE, contentW, Math.round(W*0.031), 9, s=>`700 ${s}px "Aref Ruqaa", ${quoteFamily}`);
+  const subFont = fitSize(APP_SUBTITLE, contentW, Math.round(headerTitleFont*0.62), 8, s=>`500 ${s}px ${uiFamily}`);
   const headlineFont = headline
     ? fitSize(headline, contentW, Math.round(W*0.038), 11, s=>`700 ${s}px "Aref Ruqaa", ${quoteFamily}`)
     : 0;
@@ -3852,7 +3903,7 @@ async function buildCardCanvas(pageEl, overrideText){
   const lhFactor = CARD_LINE_HEIGHTS[fontFamily] || 1.85;
   const minQuoteFont = Math.round(W*0.032);
   let quoteFontSize = Math.round(W*0.05);
-  let lines, lineHeight, H, titleY, sep1Y, headlineY, quoteStartY, sep2Y, sourceY, footerY;
+  let lines, lineHeight, H, titleY, subY, sep1Y, headlineY, quoteStartY, sep2Y, sourceY, footerY;
 
   for(;;){
     measure.font = `${quoteFontSize}px ${quoteFamily}`;
@@ -3860,14 +3911,15 @@ async function buildCardCanvas(pageEl, overrideText){
     lineHeight = Math.round(quoteFontSize*lhFactor);
 
     titleY = Math.round(pad*0.55) + Math.round(headerTitleFont*1.9);
-    sep1Y = titleY + Math.round(headerTitleFont*0.9);
+    subY = titleY + Math.round(headerTitleFont*0.3 + subFont*1.25);
+    sep1Y = subY + Math.round(headerTitleFont*0.55);
     headlineY = headline ? sep1Y + Math.round(headlineFont*1.55) : sep1Y;
     // فسحةٌ صاعدةٌ قبل السطر الأول لئلا تُقَصَّ المدّةُ والضمّةُ فوق أعلى الحروف
     quoteStartY = headlineY + (headline ? Math.round(headlineFont*0.55) : Math.round(pad*0.25)) + Math.round(quoteFontSize*1.15);
     const quoteEndY = quoteStartY + (lines.length-1)*lineHeight;
     sep2Y = quoteEndY + Math.round(quoteFontSize*0.8);
-    sourceY = sep2Y + Math.round(metaFontSize*1.75);
-    footerY = sourceY + Math.round(footerFont*2.2);
+    sourceY = sep2Y + Math.round(metaFontSize*2.3);
+    footerY = sourceY + Math.round(footerFont*2.2 + metaFontSize*0.9);
     H = Math.round(footerY + (footerLines.length-1)*footerLH + pad*0.7);
 
     if(H <= W*1.95 || quoteFontSize <= minQuoteFont) break;
@@ -3930,6 +3982,29 @@ async function buildCardCanvas(pageEl, overrideText){
   ctx.fillStyle = c.accent;
   ctx.globalAlpha = 1;
   ctx.fillRect(W-Math.max(3, Math.round(W*0.006)), 0, Math.max(3, Math.round(W*0.006)), H);
+
+  // شريطٌ علويٌّ داكنٌ للترويسة (يُختار لونه ليكون داكنًا في كل الثيمات)
+  const bandBg = [c.accentDark, c.accent, '#0a3d37'].find(x=> relLum(x) < 0.12) || '#0a3d37';
+  const bandGrad = ctx.createLinearGradient(0, 0, W, sep1Y);
+  bandGrad.addColorStop(0, bandBg);
+  bandGrad.addColorStop(1, hexToRgba(bandBg, 0.92));
+  ctx.fillStyle = bandGrad;
+  ctx.fillRect(0, 0, W, sep1Y);
+  ctx.fillStyle = c.goldLight;
+  ctx.fillRect(0, sep1Y-1, W, 2.5);
+  if(showOrn){
+    ctx.beginPath(); ctx.arc(W/2, sep1Y, 11, 0, Math.PI*2);
+    ctx.fillStyle = bandBg; ctx.fill();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = c.goldLight; ctx.stroke();
+    drawStarOrnament(ctx, W/2, sep1Y, 6.5, 3, c.goldLight, 1);
+  }
+
+  // شريطٌ خفيفٌ خلف الذيل
+  const stripTop = footerY - Math.round(footerFont*1.7);
+  ctx.fillStyle = hexToRgba(c.accent, 0.07);
+  ctx.fillRect(0, stripTop, W, H - stripTop);
+  ctx.fillStyle = hexToRgba(c.gold, 0.45);
+  ctx.fillRect(0, stripTop, W, 1);
   ctx.restore();
 
   drawFrame(ctx, W, H, currentFrame, c.gold, c.goldLight, showOrn);
@@ -3939,16 +4014,20 @@ async function buildCardCanvas(pageEl, overrideText){
 
   // category label, small, top-right corner
   ctx.textAlign = 'right';
-  ctx.fillStyle = c.accent;
+  ctx.fillStyle = c.goldLight;
   ctx.font = `500 11px Tajawal, 'Segoe UI', Tahoma, Arial, sans-serif`;
   ctx.fillText(catLabel, W-pad, Math.round(pad*0.55));
 
   // --- عنوان التطبيق وحده في الترويسة، ثم فاصلٌ عريض ---
   ctx.textAlign = 'center';
-  ctx.fillStyle = c.accentDark;
+  ctx.fillStyle = '#f6e7bf';
   ctx.font = `700 ${headerTitleFont}px "Aref Ruqaa", ${quoteFamily}`;
   ctx.fillText(APP_TITLE, W/2, titleY);
-  drawOrnamentSeparator(ctx, W, pad, sep1Y, c.line, c.goldLight, Math.round(pad*0.75));
+  ctx.fillStyle = '#f6e7bf';
+  ctx.globalAlpha = 0.8;
+  ctx.font = `500 ${subFont}px ${uiFamily}`;
+  ctx.fillText(APP_SUBTITLE, W/2, subY);
+  ctx.globalAlpha = 1;
 
   // --- عنوان الفائدة نفسها، بارزًا فوق النص ---
   if(headline){
@@ -3961,17 +4040,28 @@ async function buildCardCanvas(pageEl, overrideText){
   ctx.fillStyle = c.ink;
   ctx.font = `${quoteFontSize}px ${quoteFamily}`;
   let y = quoteStartY;
-  lines.forEach((l, i)=>{
-    if(i === lines.length - 1){ ctx.fillText(l, W-pad, y); }
-    else { fillJustifiedLineRTL(ctx, l, W-pad, y, contentW); }
+  const verseLines = markVerseWords(lines);
+  verseLines.forEach((ws, i)=>{
+    const words = ws.map(w=>({ t:w.t, col: w.verse ? c.accent : c.ink }));
+    fillColoredLineRTL(ctx, words, W-pad, y, contentW, i !== verseLines.length - 1);
     y += lineHeight;
   });
 
   drawOrnamentSeparator(ctx, W, pad, sep2Y, c.line, c.goldLight, Math.round(pad*1.6));
 
-  ctx.fillStyle = c.accentDark;
   ctx.font = `600 ${metaFontSize}px Tajawal, 'Segoe UI', Tahoma, Arial, sans-serif`;
-  ctx.fillText(q.source, W-pad, sourceY);
+  {
+    const tw = ctx.measureText(q.source).width;
+    const padX = Math.round(metaFontSize*0.85), pillH = Math.round(metaFontSize*2.1);
+    const pillW = tw + padX*2, pillX = W - pad - pillW, pillY = sourceY - Math.round(metaFontSize*1.35);
+    roundRectPath(ctx, pillX, pillY, pillW, pillH, pillH/2);
+    ctx.fillStyle = hexToRgba(c.accent, 0.1); ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = hexToRgba(c.gold, 0.7); ctx.stroke();
+    ctx.fillStyle = c.accentDark;
+    ctx.textAlign = 'center';
+    ctx.fillText(q.source, pillX + pillW/2, sourceY);
+    ctx.textAlign = 'right';
+  }
 
   // --- الذيل: الجامع والدعاء في سطرٍ واحدٍ صغير، ليبقى صدرُ البطاقة للنص ---
   ctx.textAlign = 'center';
